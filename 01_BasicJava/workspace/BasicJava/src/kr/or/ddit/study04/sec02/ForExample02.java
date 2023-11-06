@@ -8,8 +8,8 @@ public class ForExample02 {
 	public static void main(String[] args) {
 		ForExample02 obj = new ForExample02();
 //		obj.method1();
-//		obj.method2();
-		obj.method3();
+		obj.method2();
+//		obj.method3();
 	}
 
 	private void method3() {
@@ -21,8 +21,8 @@ public class ForExample02 {
 		 * ****
 		 * *****
 		 */
-		for(int w = 0; w < 5; w++) {
-			for(int h = 0; h < w + 1; h++) {
+		for(int h = 0; h < 5; h++) {
+			for(int w = 0; w < h + 1; w++) {
 				System.out.print("*");
 			}
 			System.out.println();
@@ -39,8 +39,8 @@ public class ForExample02 {
 		 * ***** 
 		 */
 		
-		for(int w = 0; w < 5; w++) {
-			for(int h = 0; h < 5; h++) {
+		for(int h = 0; h < 5; h++) {
+			for(int w = 0; w < 5; w++) {
 				System.out.print("*");
 			}
 			System.out.println();

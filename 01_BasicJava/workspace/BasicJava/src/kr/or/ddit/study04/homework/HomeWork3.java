@@ -4,21 +4,27 @@ import java.util.Scanner;
 
 public class HomeWork3 {
 	Scanner sc = new Scanner(System.in);
+	int h, w, s;
 
 	public static void main(String[] args) {
 		HomeWork3 obj = new HomeWork3();
 //		obj.method1();
-		obj.method2();
+//		obj.method2();
 //		obj.method3();
-		obj.method4();
+//		obj.method4();
 	}
 
 	private void method1() {
 		/*
-		 * 3) ***** **** *** ** *
+		 * 3) 
+		 * ***** 
+		 * **** 
+		 * *** 
+		 * ** 
+		 * *
 		 */
-		for (int w = 5; w > 0; w--) {
-			for (int h = 1; h < w + 1; h++) {
+		for(h = 0; h < 5; h++) {
+			for(w = 0; w < 5 - h; w++) {
 				System.out.print("*");
 			}
 			System.out.println();
@@ -27,10 +33,18 @@ public class HomeWork3 {
 
 	private void method2() {
 		/*
-		 * 4) ***** **** *** ** *
+		 * 4) 
+		 * *****
+		 *  ****
+		 *   ***
+		 *    **
+		 *     *
 		 */
-		for (int w = 5; w > 0; w--) {
-			for (int h = 1; h < w + 1; h++) {
+		for(h = 0; h < 5; h++) {
+			for(s = 0; s < h; s++) {
+				System.out.print(" ");
+			}
+			for(w = 0; w < 5 - h; w++) {
 				System.out.print("*");
 			}
 			System.out.println();
@@ -39,13 +53,18 @@ public class HomeWork3 {
 
 	private void method3() {
 		/*
-		 * 5) * ** *** **** *****
+		 * 5) 
+		 *     * 
+		 *    **
+		 *   ***
+		 *  ****
+		 * *****
 		 */
-		for (int w = 5; w > 0; w--) {
-			for (int h = 1; h < w; h++) {
+		for(h = 0; h < 5; h++) {
+			for(s = 0; s < 4 - h; s++) {
 				System.out.print(" ");
 			}
-			for (int h = 0; h < 6 - w; h++) {
+			for(w = 0; w < h + 1; w++) {
 				System.out.print("*");
 			}
 			System.out.println();
@@ -54,7 +73,24 @@ public class HomeWork3 {
 
 	private void method4() {
 		/*
-		 * 6) * *** ***** ******* *********
+		 * 6)
+		 *     * 
+		 *    *** 
+		 *   ***** 
+		 *  ******* 
+		 * *********
 		 */
+		for(h = 0; h < 5; h++) {
+			for(s = 0; s < 5 - h; s++) {
+				System.out.print(" ");
+			}
+			for(w = 0; w < h + 1; w++) {
+				System.out.print("*");
+			}
+			for(w = 0; w < h; w++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
 	}
 }
