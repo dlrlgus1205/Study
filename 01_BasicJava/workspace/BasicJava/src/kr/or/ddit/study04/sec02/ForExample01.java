@@ -10,8 +10,8 @@ public class ForExample01 {
 //		obj.method1();
 //		obj.method2();
 //		obj.method3();
-//		obj.method4();
-		obj.method5();
+		obj.method4();
+//		obj.method5();
 	}
 
 	private void method5() {

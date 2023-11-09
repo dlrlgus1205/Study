@@ -7,13 +7,14 @@ public class TernaryOperator {
 
 	public static void main(String[] args) {
 		TernaryOperator obj = new TernaryOperator();
-		obj.method1();
+//		obj.method1();
 		obj.method2();
 	}
 
 	private void method2() {
 		int num = sc.nextInt();
 		int result = num <10 ? 3+4 : 4+5;
+		System.out.println(result);
 	}
 
 	private void method1() {

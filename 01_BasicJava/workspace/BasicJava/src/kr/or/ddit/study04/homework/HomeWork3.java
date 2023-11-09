@@ -8,10 +8,10 @@ public class HomeWork3 {
 
 	public static void main(String[] args) {
 		HomeWork3 obj = new HomeWork3();
-//		obj.method1();
-//		obj.method2();
-//		obj.method3();
-//		obj.method4();
+		obj.method1();
+		obj.method2();
+		obj.method3();
+		obj.method4();
 	}
 
 	private void method1() {
@@ -29,6 +29,7 @@ public class HomeWork3 {
 			}
 			System.out.println();
 		}
+		System.out.println();
 	}
 
 	private void method2() {
@@ -49,6 +50,7 @@ public class HomeWork3 {
 			}
 			System.out.println();
 		}
+		System.out.println();
 	}
 
 	private void method3() {
@@ -64,11 +66,12 @@ public class HomeWork3 {
 			for(s = 0; s < 4 - h; s++) {
 				System.out.print(" ");
 			}
-			for(w = 0; w < h + 1; w++) {
+			for(w = 0; w < 1 + h; w++) {
 				System.out.print("*");
 			}
 			System.out.println();
 		}
+		System.out.println();
 	}
 
 	private void method4() {
@@ -81,15 +84,13 @@ public class HomeWork3 {
 		 * *********
 		 */
 		for(h = 0; h < 5; h++) {
-			for(s = 0; s < 5 - h; s++) {
+			for(s = 0; s < 4 - h; s++) {
 				System.out.print(" ");
 			}
-			for(w = 0; w < h + 1; w++) {
+			for(w = 0; w < h * 2 + 1; w++) {
 				System.out.print("*");
 			}
-			for(w = 0; w < h; w++) {
-				System.out.print("*");
-			}
+			
 			System.out.println();
 		}
 	}

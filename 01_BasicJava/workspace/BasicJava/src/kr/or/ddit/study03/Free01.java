@@ -1,6 +1,6 @@
 package kr.or.ddit.study03;
 
-public class Free {
+public class Free01 {
 	public static void main(String[] args) {
 		// 65430원을 만들기 위한 화폐 갯수
 		
