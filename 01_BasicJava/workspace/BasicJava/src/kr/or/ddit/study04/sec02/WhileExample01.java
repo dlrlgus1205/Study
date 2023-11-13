@@ -8,8 +8,8 @@ public class WhileExample01 {
 	public static void main(String[] args) {
 		WhileExample01 obj = new WhileExample01();
 //		obj.method1();
-		obj.method2();
-//		obj.method3();
+//		obj.method2();
+		obj.method3();
 	}
 
 	private void method3() {
