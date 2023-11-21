@@ -16,7 +16,7 @@ public class ArrayExample07 {
 		 */
 //		obj.deepCopy01();
 //		obj.deepCopy02();
-//		obj.deepCopy03();
+		obj.deepCopy03();
 	}
 
 	private void deepCopy03() {

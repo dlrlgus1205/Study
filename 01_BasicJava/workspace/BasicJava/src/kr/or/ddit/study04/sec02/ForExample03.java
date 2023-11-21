@@ -11,9 +11,9 @@ public class ForExample03 {
 //		obj.method2();
 //		obj.method3();
 //		obj.method4();
-//		obj.method5();
+		obj.method5();
 //		obj.method6();
-		obj.method7();
+//		obj.method7();
 	}
 
 	private void method7() {
