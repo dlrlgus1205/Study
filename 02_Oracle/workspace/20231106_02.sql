@@ -19,7 +19,8 @@ DDL(Date Definition Language)
       [CONSTRAINT 외래키 설정명 FOREIGN KEY (컬럼명)
       REFERENCES 테이블명(컬럼명)][,]);
       . 'NOT NULL' : 자료 삽입(INSERT INTO 명령)시 생략할 수 없다
-      . 'DEFAULT 값' : 자료 삽입(INSERT INTO 명령)시 사용자가 데이터를 정의하지 않았을 때 자동으로 입력되는 값(ex : DEFAULT 0, DEFAULT SYSDATE, ...)
+      . 'DEFAULT 값' : 자료 삽입(INSERT INTO 명령)시 사용자가 데이터를 정의하지 않았을 때 자동으로 입력되는 값
+        (ex : DEFAULT 0, DEFAULT SYSDATE, ...)
       . '기본키설정명', '외래키설정명' : 설정되는 기본키와 외래키 설정에 부여되는 이름으로 해당 데이터베이스의 WORKSPACE에서 절대 중복 사용할 수 없다
       . '기본키설정명'은 보통 'PK_테이블명'
       . '외래키설정명'은 보통 'FK_테이블_부모테이블명'
