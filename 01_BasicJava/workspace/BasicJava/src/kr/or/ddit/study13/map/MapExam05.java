@@ -47,7 +47,7 @@ public class MapExam05 {
 		m2.put("dept", "기획부");
 		m2.put("tel", "010-7562-3217");
 		m2.put("salary", 350);
-		list.add(m2);
+		list.add(m2); 
 		
 		Map<String, Object> m3 = new HashMap();
 		m3.put("emp_no", 102);

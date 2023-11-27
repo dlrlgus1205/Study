@@ -27,5 +27,6 @@ public class MapExam01 {
 		
 		int hong_score = (int)map.get("홍길동");
 
+		System.out.println(map);
 	}
 }
