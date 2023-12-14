@@ -12,9 +12,9 @@ public class DateExam {
 //		de.datemethod1();
 //		de.datemethod2();
 //		de.datemethod3();
-//		de.datemethod4();
+		de.datemethod4();
 //		de.datemethod5();
-		de.datemethod6();
+//		de.datemethod6();
 	}
 
 	private void datemethod6() {
