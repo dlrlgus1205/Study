@@ -21,8 +21,8 @@ public class ArrayListTest02 {
 	public static void main(String[] args) {
 		ArrayListTest02 obj = new ArrayListTest02();
 		
-//		obj.test1();
-//		obj.test2();
+		obj.test1();
+		obj.test2();
 		obj.test3();
 	}
 
@@ -67,7 +67,7 @@ public class ArrayListTest02 {
 		}
 		System.out.println("제일 긴 별명 : " + max);
 	}
-
+	
 	private void test1() {
 		ArrayList<String> al = new ArrayList<String>();
 		for(int i = 0; i < 5; i++) {
@@ -80,5 +80,29 @@ public class ArrayListTest02 {
 				System.out.println("'김'씨 성을 가진 사람 : " + str);
 			}
 		}
+		
+//		System.out.println();
+//		System.out.println("'김'씨 성을 가진 사람들");
+//		for(int i = 0; i < al.size(); i++) {
+//			1번 풀이
+//			if(al.get(i).substring(0, 1).equals("김")) {
+//				System.out.println(al.get(i));
+//			}
+			
+//			2번 풀이
+//			if(al.get(i).charAt(0) == '김') {
+//				System.out.println(al.get(i));
+//			}
+			
+//			3번 풀이
+//			if(al.get(i).startsWith("김")) {
+//				System.out.println(al.get(i));
+//			}
+			
+//			4번 풀이
+//			if(al.get(i).indexOf("김") == 0) {
+//				System.out.println(al.get(i));
+//			}
+//		}
 	}
 }
