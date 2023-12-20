@@ -119,5 +119,11 @@ class SortNumDesc implements Comparator<Member> {
 //			return 0;
 //		}
 		return mem2.getNum() - mem1.getNum();
+		
+//		Wrapper 클래스 이용하기 방법 1
+//		return new Integer(mem1.getNum()).compareTo(mem2.getNum()) * -1;
+		
+//		Wrapper 클래스 이용하기 방법 2
+//		return Integer.compare(mem1.getNum(), mem2.getNum()) * -1;
 	}
 }
