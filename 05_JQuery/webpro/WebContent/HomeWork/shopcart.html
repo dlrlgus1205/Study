@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+body{
+	display : inline;
+	text-align: center;
+}
+table{
+ margin : 0 auto;
+ border-collapse : collapse;
+ border : 5px solid #ccc;
+ text-align: center;
+}
+#tr1{
+	font-weight: 600;
+}
+td{
+	width : 250px;
+	padding : 10px;
+}
+.td1{
+	width : auto;
+	height : auto;
+	text-align: center;
+}
+
+.btn{
+	margin-top:40px;
+	width : 130px;
+}
+</style>
+</head>
+<body>
+<div>
+<h2>장바구니 페이지</h2>
+<table border = "1">
+<tr id = "tr1">
+<td>품목</td>
+<td>가격</td>
+<td>수량</td>
+<td>합계</td>
+</tr>
+<tr>
+<td>컴퓨터 세트</td>
+<td>2,000,000원</td>
+<td><input class = "td1" type = "number" value = "0"></td>
+<td><input class = "td1" type = "number" value = "0"></td>
+</tr>
+<tr>
+<td>티셔츠</td>
+<td>5000원</td>
+<td><input class = "td1" type = "number" value = "0"></td>
+<td><input class = "td1" type = "number" value = "0"></td>
+</tr>
+<tr>
+<td>음악파일</td>
+<td>1000원</td>
+<td><input class = "td1" type = "number" value = "0"></td>
+<td><input class = "td1" type = "number" value = "0"></td>
+</tr>
+<tr>
+<td>영화파일</td>
+<td>5000원</td>
+<td><input class = "td1" type = "number" value = "0"></td>
+<td><input class = "td1" type = "number" value = "0"></td>
+</tr>
+</table>
+<div>
+<input class="btn" type="submit" value ="계산">
+<input class="btn" type="submit" value ="구매">
+<input class="btn" type="reset">
+</div>
+</div>
+</body>
+</html>

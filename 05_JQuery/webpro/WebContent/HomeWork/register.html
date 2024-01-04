@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="icon" href="../images/favicon_heart.png" type="image/x-icon">
+
+<style>
+.register{
+ display : inline;
+ position: relative;
+ top: 74px;
+ left : 50px;
+ background-color : white;
+}
+h4{
+	padding-inline-start : 40px;
+}
+#did{
+	border : 1px solid black;
+	width : 500px;
+	padding : 15px 0 15px 30px;
+}
+.lab{
+	display : inline-block;
+	width : 150px;
+	text-align: left;
+}
+.bdiv{
+	text-align: center; 
+}
+.binp{
+	display : inline-block;
+	text-align: center;
+	width : 200px;
+}
+</style>
+</head>
+<body>
+<div>
+<div class = "register">회원정보입력</div>
+<h4>회원가입 페이지</h4>
+<div id = "did">
+<label class = "lab">아이디</label>
+<input type = "text" name = "id">
+<input type = "submit" value = "중복검사"><br>
+<label class= "lab">패스워드</label>
+<input type = "text" name = "pass"><br>
+<label class= "lab">패스워드 확인</label>
+<input type = "text" name = "pass"><br>
+<label class = "lab">이름</label>
+<input type ="text" name = "name"><br>
+<label class = "lab">휴대폰번호</label>
+<input type = "tel" name = "tel"><br>
+<label class= "lab">이메일</label>
+<input type = "text" name ="email"><br>
+<label class= "lab">생일</label>
+<input type = "date"><br>
+<label class= "lab">홈페이지</label>
+<input type = "text" name = "hpage"><br>
+<label class = "lab">성별</label>
+<input  type = "radio" name = "gender" value = "남자">남자
+<input  type = "radio" name = "gender" value = "여자">여자<br><br>
+<div class = "bdiv">
+<input class = "binp" type = "submit" value = "제출">
+<input class = "binp" type = "reset">
+</div>
+</div>
+</div>
+</body>
+</html>

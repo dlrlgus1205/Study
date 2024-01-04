@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Movie</title>
+<link rel = "icon" href = "../images/favicon_heart.png" type = "image/x-icon">
+<script>
+movie1 = (movie) =>{
+	mov = document.getElementById('ifr');
+	mov.src = movie;
+}
+</script>
+<style>
+body{
+height: 100%;
+}
+.mif{
+margin : 40px 0;
+}
+#ifr{
+border : white;
+display : block;
+margin : 0 auto;
+width : 90%;
+height : 300px;
+}
+.movie{
+display : flex;
+flex-direction: row;
+}
+.mov1, .mov2{
+border : 1px solid gray;
+width : 40%;
+margin : auto;
+}
+img{
+display : block;
+width : 80%;
+height : 80%;
+margin : 40px auto;
+}
+</style>
+</head>
+<body>
+<div class ="mif">
+<iframe id = "ifr"></iframe>
+</div>
+
+<div class = "movie">
+
+<div class = "mov1">
+<img src = "../images/영화1.jpg" alt = "영화1.jpg" onclick = "movie1('https://www.youtube.com/embed/tbg3QAu-GnI?si=db7NY3k9zOEBPbj7')">
+</div>
+
+<div class = "mov2">
+<img src = "../images/영화2.jpg" alt = "영화2.jpg" onclick = "movie1('https://www.youtube.com/embed/k3jV6DMTCSE?si=ClrwRJ7Ex9e8vnzs')">
+</div>
+</div>
+
+</body>
+</html>

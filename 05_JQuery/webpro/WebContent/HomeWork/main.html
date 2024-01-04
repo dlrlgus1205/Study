@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/mainstyle.css">
+<link rel = "icon" href = "../images/favicon_heart.png" type = "image/x-icon">
+</head>
+<body>
+
+<div class = "wrapper">
+<header>
+<h1>
+<img src = "../images/favicon_heart.png" alt = "favicon_heart.png">
+<a href = "main.html">DDIT MALL</a>
+</h1>
+</header>
+
+<nav>
+<ul>
+<li><a href = "#">Home</a></li>
+<li><a href = "#">About</a></li>
+<li><a href = "#">News</a></li>
+<li><a href = "#">My Account</a></li>
+<li><a href = "#">Contacts</a></li>
+</ul>
+</nav>
+
+<div class = "main">
+<aside id = "left">
+<h2>카테고리</h2>
+<ul>
+<li><a href = "computer.html" target = "ifr">컴퓨터</a></li>
+<li><a href = "clothing.html" target = "ifr">의류</a></li>
+<li><a href = "music.html" target = "ifr">음악</a></li>
+<li><a href = "movie.html" target = "ifr">영화</a></li>
+<li><a href = "sports.html" target = "ifr">스포츠/레져</a></li>
+<li><a href = "furniture.html" target = "ifr">가구/인테리어</a></li>
+<li><a href = "food.html" target = "ifr">식품</a></li>
+</ul>
+</aside>
+	
+<section id = "art">
+<article>
+<iframe src = "computer.html" name = "ifr"></iframe>
+</article>
+</section>
+	
+<aside id = "right">
+<h2>Shopping Cart</h2>
+<p>현재 쇼핑카트에 물품이 없습니다</p>
+<a id = "showcart" href = "shopcart.html" target = "_blank">쇼핑카트 보기</a>
+<h2>Login</h2>
+<div id = "dform">
+<form action = "#" method = "get">
+<input class = "data" type = "text" name = "id" placeholder = "아이디"><br>
+<input class = "data" type = "password" name = "pass" placeholder = "패스워드"><br>
+
+<div id = "dbtn">
+<input class = "login" type = "submit" value = "로그인">
+<input class = "login login2" type = "reset" value = "초기화"><br>
+</div>
+
+<div id = "da">
+<a href = "register.html" target = "_blank">회원가입</a>
+<a href = "#">비밀번호 분실</a>
+</div>
+</form>
+</div>
+</aside>
+</div>
+
+<footer>
+<span class = "faddress">주소 : 대전광역시 중구 계룡로 846, 402호</span>
+<span class = "fname">제작자 : 이기현</span>
+<span class = "fcopy">COPYRIGHT ⓒ DDIT MALL.ALL RIGHTS RESERVED.</span>
+</footer>
+</div>
+</body>
+</html>
