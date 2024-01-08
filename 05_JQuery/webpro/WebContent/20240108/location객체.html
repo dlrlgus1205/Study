@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/public.css">
+<script>
+lohref = () => {
+	location.href = "window.opner.html";
+}
+
+goPage = () => {
+	// 입력
+	userName = prompt("이름 입력");
+	location.href = "loctest.jsp?name=" + userName;
+}
+goReload = () => {
+	//랜덤으로 발생하는 문자열을 result5에 출력
+	arr = ["Hello", HappyNewYear", "사랑은 늘 도망가", "베텔기우스", "드라이 플라워", "그리워하다", "스즈메", "그랜드 이스케이프"];
+	
+	rand = Math.floor(Math.random() * arr.length);
+	
+	res = `<h1> ${arr[rand]}</h1>`;
+	vreout = document.getElementById('result5').innerHTML;
+	vreout.innerHTML = res;
+	vreout.style.color = "red";
+	vreout.style.fontSize = "2.0rem";
+	
+	setTimeout(function(){
+		location.reload();
+	}, 1000)
+}
+</script>
+</head>
+<body>
+
+<div class = "box">
+<h4></h4>
+<input type = "button" value = "확인" onclick = "proc1()">
+<br><br>
+<div id = "result1"></div>
+</div>
+
+<div class = "box">
+<h4></h4>
+특정 페이지로 이동(버튼에서 직접) : <input type = "button" value = "페이지 이동" onclick = "location.href = 'html/jsp/servlet'"><br>
+특정 페이지로 이동(script 함수에서 지정) :
+<input type = "button" value = "확인" onclick = "lohref()">
+<br><br>
+<div id = "result1"></div>
+</div>
+
+<div class = "box">
+<h4></h4>
+a 태그에서 location.href를 이용<br><br>
+a 태그의 기본 href = "페이지"
+<a href = "window_opener.html">새창 열기</a> <br>
+a 태그의 href에서 js 함수 호출
+<a href = "javascript:goPage()">새창 열기</a>
+
+js 함수 호출 - location.href
+<a href = "#" onclick = "goPage()">멤버리스트</a><br>
+onclick = "location.href"
+<a href = "#" onclick = "location.href = 'loctest.jsp?name=korea'">멤버리스트</a>
+<input type = "button" value = "확인" onclick = "proc1()">
+<br><br>
+<div id = "result1"></div>
+</div>
+
+<div class = "box">
+<h4></h4>
+<input type = "button" value = "확인" onclick = "proc1()">
+<br><br>
+<div id = "result4"></div>
+</div>
+
+<div class = "box">
+<h4></h4>
+<input type = "button" value = "확인" onclick = "proc5()">
+<br><br>
+<div id = "result5"></div>
+</div>
+</body>
+</html>
