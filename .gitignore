@@ -62,3 +62,9 @@
 !/05_JQuery/webpro/WebContent
 /05_JQuery/webpro/WebContent/META-INF/*
 /05_JQuery/webpro/WebContent/WEB-INF/*
+
+!/05_JQuery/jqpro
+/05_JQuery/jqpro/*
+!/05_JQuery/jqpro/WebContent
+/05_JQuery/jqpro/WebContent/META-INF/*
+/05_JQuery/jqpro/WebContent/WEB-INF/*

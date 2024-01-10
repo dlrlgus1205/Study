@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/public.css">
+<script>
+	// 문자 배열
+	arr = ["카리나", "윈터", "해린", "민지", "안유진", "김채원", "홍은채"]
+proc1 = () => {
+	// 랜덤
+	rand = Math.floor(Math.random() * arr.length);
+	
+	// 문자열 선택 arr[rand] - textNode로 생성
+	vtext = document.createTextNode(arr[rand]);
+	
+	// p 태그 생성
+	vp = document.createElement('p');
+	// p 태그에 추가
+	vp.appendChild(vtext);
+	// result1로 접근 - p 태그를 추가
+	vres = document.getElementById('result1');
+	vres.appendChild(vp);
+}
+
+proc2 = () => {
+	// 부모 검색 - result1
+	vparent = document.getElementById('result1');
+	// 삭제 대상의 자식을 선택 - firstChild
+	vchild = vparent.firstChild;
+	// 삭제하기 - 부모.removeChild(자식)
+	vparent.removeChild(vchild);
+}
+
+proc3 = () => {
+	// 랜덤
+	rand = Math.floor(Math.random() * arr.length);
+	
+	// 문자열 선택 arr[rand] - textNode생성
+	vtext = document.createTextNode(arr[rand]);
+	
+	// input type = button value ="삭제"
+	// input 태그 생성
+	vinp = document.createElement('input');
+	vinp.type = "button";
+	vinp.value = "삭제";
+	vinp.onclick = function(){
+		vparent = this.parentNode;
+		
+		vparent.remove();
+	}
+	
+	// p 태그 생성
+	vp = document.createElement('p');
+	
+	// p 태그에 문자열 추가
+	vp.appendChild(vtext);
+	vp.appendChild(vinp);
+	
+	// result2 를 검색 - p 태그를 추가
+	vres2 = document.getElementById('result2');
+	vres2.appendChild(vp);
+}
+selImg = null;
+start = (btn) => {
+	
+	if(selImg != null) selImg.style.border = "none";
+	// btn 매개변수 : 시작버튼, 지역변수
+	// 시작버튼을 안보이도록 설정
+	btn.style.display = "none";
+	gbtn = btn;
+	
+	// id = result3 을 검색 - 부모 역할
+	vres3 = document.getElementById('result3');
+	
+	vid = setInterval(function() {
+	// 첫번째 이미지를 선택 - firstChild - 자식
+	vimg = vres3.firstChild;
+	// 부모.appendChild(자식) - 이동의 의미로 실행
+	vres3.appendChild(vimg);
+	}, 500)
+}
+
+stop = () => {
+	gbtn.style.display = "inline";
+	clearInterval(vid);
+	
+	// 전체 이미지 
+	imgAll = document.querySelectorAll('#result3 img');
+	// 랜덤 발생 - 이미지의 갯수 이용 - imgAll.length
+	rand =  Math.floor(Math.random() * imgAll.length);
+	
+	// 이미지 선택 // imgAll[rand]
+	selImg = imgAll[rand];
+		
+	// selImg의 스타일 변경
+	selImg.style.border = "6px solid blue";
+}
+</script>
+<style>
+img{
+width : 80px;
+height : 80px;
+}
+</style>
+</head>
+<body>
+
+<div class = "box">
+<h4></h4>
+<input type = "button" value = "생성" onclick = "proc1()">
+<input type = "button" value = "삭제" onclick = "proc2()">
+<br><br>
+<div id = "result1"></div>
+</div>
+</body>
+
+<div class = "box">
+<h4></h4>
+<input type = "button" value = "생성" onclick = "proc3()">
+<br><br>
+<div id = "result2"></div>
+</div>
+
+<div class = "box">
+<h4></h4>
+<input type = "button" value = "시작" onclick = "start(this)">
+<input type = "button" value = "종료" onclick = "stop()">
+<br><br>
+<div id = "result3">
+<img src = "../images/펭귄.jpg" alt = "펭귄.jpg"> 
+<img src = "../images/핫초코.jpg" alt = "핫초코.jpg"> 
+<img src = "../images/코알라.jpg" alt = "코알라.jpg"> 
+<img src = "../images/라떼.jpeg" alt = "라떼.jpeg"> 
+<img src = "../images/우주1.jpeg" alt = "우주1.jpeg"> 
+<img src = "../images/Lighthouse.jpg" alt = "Lighthouse.jpg"> 
+</div>
+</div>
+</body>
+</html>

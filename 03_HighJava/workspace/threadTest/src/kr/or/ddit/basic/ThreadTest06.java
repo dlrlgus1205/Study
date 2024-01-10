@@ -13,7 +13,6 @@ public class ThreadTest06 {
 	}
 }
 
-
 // 데이터를 입력하는 쓰레드 클래스
 class DataInput extends Thread{
 	// 입력 여부를 확인하기 위한 변수 선언 - 쓰레드에서 공통으로 사용할 변수
@@ -27,7 +26,6 @@ class DataInput extends Thread{
 		System.out.println("입력한 값 : " + str);
 	}
 }
-
 
 // 카운트 다운을 진행하는 쓰레드 클래스
 class DataCountDown extends Thread{

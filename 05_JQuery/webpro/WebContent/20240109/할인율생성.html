@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/public.css">
+<script>
+vp = null;
+sales = (pimg) => {
+	// 이미 생성돼있는 p 태그 삭제 - 최초 실행 시 p 태그가 없어서 에러
+	if(vp != null) vp.style.display = "none";
+	// 랜덤 발생 5 ~ 15 % 사이로 random() * 11 + 5
+	rand = Math.floor(Math.random() * 11 + 5);
+	// p 태그 생성
+	vp = document.createElement('p');
+	// 13 % 문자열을 생성 - textNode 생성
+	tnode = document.createTextNode(rand + "%");
+	// p 태그에 textNode 추가
+	vp.appendChild(tnode);
+	// 클릭한 이미지 - this 의 부모를 검색 - parentNode
+	imgParent = pimg.parentNode;
+	// imgParent에 p 태그 추가
+	imgParent.appendChild(vp);
+}
+
+window.onload = function(){
+	vimg = document.querySelectorAll('#result2 img');
+	
+	for(i = 0; i < vimg.length; i++) {
+//	 	vimg[i].addEventListener('click',function(){});
+		vimg[i].addEventListener('click', imgSales);
+	}
+}
+vp = null;
+imgSales = function(){
+	// 이미 생성돼있는 p 태그 삭제 - 최초 실행 시 p 태그가 없어서 에러
+	if(vp != null) vp.style.display = "none";
+	// 랜덤 발생 5 ~ 15 % 사이로 random() * 11 + 5
+	rand = Math.floor(Math.random() * 11 + 5);
+	// p 태그 생성
+	vp = document.createElement('p');
+	// 13 % 문자열을 생성 - textNode 생성
+	tnode = document.createTextNode(rand + "%");
+	// p 태그에 textNode 추가
+	vp.appendChild(tnode);
+	// 클릭한 이미지 - this 의 부모를 검색 - parentNode
+	imgParent = this.parentNode;
+	// imgParent에 p 태그 추가
+	imgParent.appendChild(vp);
+	// 더 이상 클릭이벤트가 발생하지 않도록 이벤트 제거
+	this.removeEventListener('click', imgSales);
+}
+</script>
+<style>
+#result1, #result2 {
+display : flex;
+flex-direction : row;
+width : 70%;
+height : 300px;
+background : gray;
+}
+.result div{
+	flex : 25%;
+	height : 80%;
+	background : lightgray;
+}
+img {
+	width : 100%;
+	height : 75%;
+}
+p{
+text-align : center;
+}
+</style>
+</head>
+<body>
+
+<div class = "box">
+<h4>각 이미지에 onclick 이벤트 설정</h4>
+<br><br>
+<div class = "result" id = "result1">
+<div><img onclick = "sales(this)" src = "../images/라떼.jpeg" alt = "라떼.jpeg"></div>
+<div><img onclick = "sales(this)" src = "../images/아메리카노.jpg" alt = "아메리카노.jpg"></div>
+<div><img onclick = "sales(this)" src = "../images/에스프레소.jpg" alt = "에스프레소.jpg"></div>
+<div><img onclick = "sales(this)" src = "../images/핫초코.jpg" alt = "핫초코.jpg"></div>
+</div>
+</div>
+
+<div class = "box">
+<h4>js에서 이벤트 일괄 등록 처리<br>
+addEventListener()</h4>
+<br><br>
+<div class = "result" id = "result2">
+<div><img src = "../images/라떼.jpeg" alt = "라떼.jpeg"></div>
+<div><img src = "../images/아메리카노.jpg" alt = "아메리카노.jpg"></div>
+<div><img src = "../images/에스프레소.jpg" alt = "에스프레소.jpg"></div>
+<div><img src = "../images/핫초코.jpg" alt = "핫초코.jpg"></div>
+</div>
+</div>
+
+<!-- <script>
+vimg = document.querySelector('#result2 img');
+
+
+for(i = 0; i < vimg.length; i++) {
+// 	vimg[i].addEventListener('click',function(){});
+	vimg[i].addEventListener('click', imgSales);
+}
+
+imgSales = function(){
+	this.
+}
+</script> -->
+</body>
+</html>
