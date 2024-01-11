@@ -56,6 +56,10 @@
 /03_HighJava/workspace/javaNetwork/*
 !/03_HighJava/workspace/javaNetwork/src
 
+!/03_HighJava/workspace/jdbcTest
+/03_HighJava/workspace/jdbcTest/*
+!/03_HighJava/workspace/jdbcTest/src
+
 /05_JQuery/*
 !/05_JQuery/webpro
 /05_JQuery/webpro/*
