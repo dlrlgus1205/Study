@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/public.css">
+<script src = "../js/jquery-3.7.1.min.js"></script>
+<script>
+$(() => {
+	$(document).on('click', '.btn1', () => {
+		newBtn = $('<input class = "btn1" type = "button" value = "확인">');
+		
+		$('#result1').append(newBtn);
+	})
+	
+	$('.btn2').on('click', () => {
+		$(document).off('click', '.btn1');
+	})
+	
+	$('#fadd').on('click', () => {
+		// 새로운 요소를 만든다
+		newEle = $('<p><input class = "bfile" type = "file"><input class = "fdel" type = "button" value = "삭제"></p>');
+		$('#result2').append(newEle)
+	})
+	
+	$(document).on('click', '.fdel', function(){
+		vpa = $(this).parent();
+		vpa.remove();
+	})
+})
+</script>
+</head>
+<body>
+
+<div class = "box">
+<h4></h4>
+<input class = "btn1" type = "button" value = "확인">
+<input class = "btn2" type = "button" value = "해제">
+<br><br>
+<div id = "result1"></div>
+<input class = "bfile" type = "file" value = "확인">
+</div>
+
+<div class = "box">
+<h4></h4>
+<br><br>
+<div id = "result2">
+<input class = "bfile" type = "file">
+<input id = "fadd" type = "button" value = "추가"><br>
+</div>
+</div>
+</body>
+</html>

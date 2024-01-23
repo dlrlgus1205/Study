@@ -46,7 +46,6 @@ public class JdbcTest05 {
 
 				rs = pstmt.executeQuery();
 				
-				
 				rs.next();
 				String grs = rs.getString("CNT");
 				

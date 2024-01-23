@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/public.css">
+<script src = "../js/jquery-3.7.1.min.js"></script>
+<script>
+$(document).ready(() => {
+	$('p').on('click', function(){
+		// console.log($(this).css('font-size'));
+		// $(this).css('font-size', '+=1.2rem');
+		
+		//부모 찾기
+		vparents = $(this).parent();
+		
+		if(vparents.is('.result')){
+			$(this).clone().appendTo(vparents).css('color', 'red');
+		}
+	})
+	$('.pp').on('click', function(){
+		// $(this).css('color', 'red');
+		$(this).addClass('bcolor');
+	})
+})
+</script>
+<style>
+.result {
+background : yellow;
+}
+p{
+background : gold;
+}
+.bcolor {
+background : blue;
+}
+</style>
+</head>
+<body>
+
+<div class = "box">
+<h4></h4>
+<br><br>
+<div class = "result" id = "result1">
+<p>무궁화 꽃이 피었습니다</p>
+</div>
+<p>카리나는 예쁘다</p>
+<div class = "result" id = "result2">
+<p>Steal the show</p>
+</div>
+</div>
+
+<div class = "box">
+<h4></h4>
+<br><br>
+<div class = "result" id = "result3">
+<p>class = "pp" 무궁화 꽃이 피었습니다</p>
+</div>
+<p>카리나는 예쁘다</p>
+<div class = "result" id = "result4">
+<p>class = "pp" Steal the show</p>
+</div>
+</div>
+</body>
+</html>

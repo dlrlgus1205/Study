@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/public.css">
+<script src = "../js/jquery-3.7.1.min.js"></script>
+<script>
+$(document).ready(function(){
+	/* $('p').on('click', function(){
+		$(this).toggleClass('pcolor');
+	}) */
+	$('p').on('click', function(){
+		if($(this).hasClass('pcolor')){
+			$(this).removeClass('pcolor');
+		}
+		else{
+			$(this).addClass('pcolor');
+		}
+	})
+	/* $('p').hover(function(){
+		$(this).toggleClass('pback');
+	}) */
+	/* $('p').on('mouseover',function(){
+		$(this).addClass('pback');
+	})
+	$('p').on('mouseout', function(){
+		$(this).removeClass('pback');
+	}) */
+})
+</script>
+<style>
+.pcolor{
+color : red;
+}
+.pback{
+background : crimson;
+}
+p:hover{
+background : crimson;
+}
+</style>
+</head>
+<body>
+
+<div class = "box">
+<h4></h4>
+<input type = "button" value = "확인" onclick = "proc1()">
+<br><br>
+<div id = "result1">
+<p>다섯살 때부터 나는 피아노를 쳤어</p>
+<p>영재였지</p>
+<p>베토벤부터 모짜르트 바흐 쇼팽</p>
+<p>선배였지</p>
+<p>허나 나난걸 접고서 가사를 썼어</p>
+<p>열넷이었지</p>
+</div>
+</div>
+</body>
+</html>

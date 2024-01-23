@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/public.css">
+<script src = "../js/jquery-3.7.1.min.js"></script>
+<script>
+$(document).ready(() => {
+	$('#btn1').on('click', () => {
+		$('p').attr('class', 'p1');
+		$('p').attr('title', '노래');
+	})
+	
+	$('#btn2').on('click', () => {
+		$('#result2 p').attr('title', function(){
+			vtext = $(this).text();
+			
+			// title = vtext.slice(0, 3);
+			// 문자열을 공백 기준으로 분리 - 배열 리턴
+			txtarr = vtext.split(" ");
+			return txtarr[0];
+		})
+	})
+})
+</script>
+</head>
+<body>
+
+<div class = "box">
+<h4></h4>
+<input type = "button" value = "확인" id = "btn1">
+<br><br>
+<div id = "result1">
+<p>베텔기우스</p>
+<p>스즈메</p>
+<p>스파클</p>
+<p>레몬</p>
+<p>그저 네게 맑아라</p>
+<p>드라이 플라워</p>
+</div>
+</div>
+
+<div class = "box">
+<h4></h4>
+<input type = "button" value = "확인" id = "btn2">
+<br><br>
+<div id = "result2">
+<p>베텔기우스</p>
+<p>스즈메</p>
+<p>스파클</p>
+<p>레몬</p>
+<p>그저 네게 맑아라</p>
+<p>드라이 플라워</p>
+</div>
+</div>
+</body>
+</html>

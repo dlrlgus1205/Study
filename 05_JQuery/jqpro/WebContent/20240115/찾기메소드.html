@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/public.css">
+<script src = "../js/jquery-3.7.1.min.js"></script>
+<script>
+$(() => {
+	$('#par').on('click', () =>{
+		$('span').parent().css('border', '2px solid red');
+	})
+	
+	$('#spar').on('click', () =>{
+		$('span').parents().css('border', '2px solid green');
+	})
+	
+	$('#separ').on('click', () =>{
+		$('span').parents('ul').css('border', '2px solid blue');
+	})
+	
+	$('#untpar').on('click', () =>{
+		$('span').parentsUntil('#result1').css('border', '2px solid hotpink');
+	})
+	
+	$('.btn').on('click', function(){
+		vparents = $(this).parents('.result');
+		
+		vspan = vparents.find('span');
+		vspan.css('background', 'gold');
+	})
+})
+</script>
+</head>
+<body>
+
+<div class = "box">
+<h4></h4>
+<input type = "button" value = "parent" id = "par">
+<input type = "button" value = "parents" id = "spar">
+<input type = "button" value = "parent_se" id = "separ">
+<input type = "button" value = "parent_unt" id = "untpar">
+<br><br>
+<div class = "ancestors" id = "result1">
+<div style = "width : 500px;">div (great-grandparent)
+<ul>ul (grandparent)
+<li>li (direct parent)
+<span>span</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class = "box">
+<h4></h4>
+<br><br>
+<div class = "ancestors result" id = "result2">
+<div style = "width : 500px;">div (great-grandparent)
+<ul>ul (grandparent)
+<li>li (direct parent)
+<span>span</span>
+</li>
+</ul>
+<button class = "btn" type = "button">확인</button>
+</div>
+</div>
+<div class = "ancestors result" id = "result3">
+<div style = "width : 500px;">div (great-grandparent)
+<ul>ul (grandparent)
+<li>li (direct parent)
+<span>span</span>
+</li>
+</ul>
+<button class = "btn" type = "button">확인</button>
+</div>
+</div>
+</div>
+</body>
+</html>
