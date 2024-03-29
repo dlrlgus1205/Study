@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="img">
+	<insert id="insertImg" parameterType="imgVo">
+		insert into img(img_no,post_no,img_name,img_path,img_upload_date)
+		values(img_seq.nextval, #{post_no},#{img_name},#{img_path},sysdate)
+	
+	</insert>
+	
+	<select id="getAllImg" resultType="imgVo">
+	
+		select * from img
+	
+	</select>
+	
+	<select id="getImg" parameterType="int" resultType="ImgVO">
+ 		select * from img where img_no = #{img_no}
+ 	</select>
+
+	<select id="imgSelect" parameterType="int" resultType="ImgVO">
+		SELECT * 
+          FROM IMG
+         WHERE POST_NO = #{post_no}
+           AND IMG_NO  = (SELECT MIN(IMG_NO)
+                            FROM IMG
+                           WHERE POST_NO = #{post_no})
+	</select>
+
+</mapper>
+

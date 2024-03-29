@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+function mc() {
+	let it = document.getElementsByClassName("it");
+	let a = it[0].value;
+	let b = it[1].value;
+	let aa = parseInt(a);
+	let bb = parseInt(b);
+	
+	let mul = aa * bb;
+	it[2].value = mul;
+	
+};
+</script>
+<style type="text/css">
+.it{
+	width: 40px;
+}
+</style>
+</head>
+<body>
+JS03<br>
+<input type = "text" class = "it"/>*
+<input type = "text" class = "it"/>
+<input type = "button" value = "=" onclick = "mc()"/>
+<input type = "text" class = "it"/>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+function fn_mod_act(){
+	document.frm.submit();
+}
+</script>
+</head>
+<body>
+<form action="mem_mod_act" name="frm" method="post">
+<table border="1">
+	<tr>
+		<th>사번</th>
+		<td><input type="text" value="{{vo.m_id}}" name="m_id"></td>
+	</tr>
+	<tr>
+		<th>이름</th>
+		<td><input type="text" value="{{vo.m_name}}" name="m_name"></td>
+	</tr>
+	<tr>
+		<th>전화</th>
+		<td><input type="text" value="{{vo.m_tel}}" name="m_tel"></td>
+	</tr>
+	<tr>
+		<th>메일</th>
+		<td><input type="text" value="{{vo.m_email}}" name="m_email"></td>
+	</tr>
+	<tr>
+		<td colspan = "2">
+			<input type ="button" value="저장" onclick = "fn_mod_act()">
+			<input type ="button" value="취소">
+		</td>
+	</tr>
+</table>
+</form>
+
+</body>
+</html>

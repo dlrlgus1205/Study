@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="jquery-3.7.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+function myclick(){
+	      axios.post("/axios",{
+	    	  method : "post",
+	    	  data : {
+	    		  menu : "짜장면",
+	    	  },
+	      }).then((res) => {
+	          console.log(res.data.result);
+	      });
+}
+</script>
+</head>
+<body>
+Axios<br>
+<a href = "javascript:myclick()">Axios</a>
+</body>
+</html>

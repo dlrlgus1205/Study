@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="jquery-3.7.1.js"></script>
+<script>
+function fn_list(){
+	$.ajax({
+		type: 'POST',
+		url: '/emplist',
+		dataType : 'JSON',
+		contentType: "application/json",
+		success: function(res){
+			console.log(res.list);
+			
+			let list = res.list;
+			let txt = "";
+			
+			for(let i = 0; i < list.length; i++){
+				txt += "<tr>";
+				txt += `<td><a href = "javascript:fn_one('${list[i].e_id}')"> ${list[i].e_id} </a></td>`;
+				txt += `<td> ${list[i].e_name} </td>`;
+				txt += `<td> ${list[i].gen} </td>`;
+				txt += `<td> ${list[i].addr} </td>`;
+				txt += "</tr>";
+			}
+			$("#mytbody").html(txt);
+		}
+	})
+}
+
+function fn_one(e_id){
+	let param = {
+		'e_id' : e_id
+	}
+	$.ajax({
+		type: 'POST',
+		url: '/empone',
+		data : JSON.stringify(param),
+		dataType : 'JSON',
+		contentType: "application/json",
+		success: function(res){
+			let obj_e_id = document.getElementById("e_id");
+			let obj_e_name = document.getElementById("e_name");
+			let obj_gen = document.getElementById("gen");
+			let obj_addr = document.getElementById("addr");
+			
+			let vo = res.vo;
+			console.log(vo);
+			
+			obj_e_id.value = vo.e_id;
+			obj_e_name.value = vo.e_name;
+			obj_gen.value = vo.gen;
+			obj_addr.value = vo.addr;
+		}
+	})
+}
+
+function fn_add(){
+	let obj_e_id = document.getElementById("e_id");
+	let obj_e_name = document.getElementById("e_name");
+	let obj_gen = document.getElementById("gen");
+	let obj_addr = document.getElementById("addr");
+	
+	let param = {
+			'e_id' : obj_e_id.value
+			, 'e_name' : obj_e_name.value
+			, 'gen' : obj_gen.value
+			, 'addr' : obj_addr.value
+		}
+	$.ajax({
+		type: 'POST',
+		url: '/empadd',
+		data : JSON.stringify(param),
+		dataType : 'JSON',
+		contentType: "application/json",
+		success: function(res){
+			let cnt = res.cnt;
+			if(cnt == 1){
+				alert("추가 완료");
+				
+				fn_list();
+				
+				obj_e_id.value = "";
+				obj_e_name.value = "";
+				obj_gen.value = "";
+				obj_addr.value = "";
+			}
+			else {
+				alert("추가 실패");
+			}
+		}
+	})
+}
+
+function fn_mod(){
+	let obj_e_id = document.getElementById("e_id");
+	let obj_e_name = document.getElementById("e_name");
+	let obj_gen = document.getElementById("gen");
+	let obj_addr = document.getElementById("addr");
+	
+	let param = {
+			'e_id' : obj_e_id.value
+			, 'e_name' : obj_e_name.value
+			, 'gen' : obj_gen.value
+			, 'addr' : obj_addr.value
+		}
+	$.ajax({
+		type: 'POST',
+		url: '/empadd',
+		data : JSON.stringify(param),
+		dataType : 'JSON',
+		contentType: "application/json",
+		success: function(res){
+			let cnt = res.cnt;
+			if(cnt == 1){
+				alert("추가 완료");
+				
+				fn_list();
+				
+				obj_e_id.value = "";
+				obj_e_name.value = "";
+				obj_gen.value = "";
+				obj_addr.value = "";
+			}
+			else {
+				alert("추가 실패");
+			}
+		}
+	})
+}
+
+function fn_del(){
+	let obj_e_id = document.getElementById("e_id");
+	
+	let param = {
+			'e_id' : obj_e_id.value
+		}
+	$.ajax({
+		type: 'POST',
+		url: '/empdel',
+		data : JSON.stringify(param),
+		dataType : 'JSON',
+		contentType: "application/json",
+		success: function(res){
+			let cnt = res.cnt;
+			if(cnt == 1){
+				alert("삭제 완료");
+				
+				fn_list();
+				
+				obj_e_id.value = "";
+			}
+			else {
+				alert("삭제 실패");
+			}
+		}
+	})
+}
+</script>
+<style>
+td{
+	text-align: center;
+}
+</style>
+</head>
+<body onload = "fn_list()">
+EMP<br>
+<table border = "1">
+	<tr>
+		<td>사번</td>
+		<td>이름</td>
+		<td>성별</td>
+		<td>주소</td>
+	</tr>
+	<tbody id = "mytbody">
+		<tr>
+			<td colspan = "4">
+			검색된 데이터가 없습니다
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table border = "1">
+	<tr>
+		<td>사번</td>
+		<td>
+			<input type = "text" id = "e_id">
+		</td>
+	</tr>
+	<tr>
+		<td>이름</td>
+		<td>
+			<input type = "text" id = "e_name">
+		</td>
+	</tr>
+	<tr>
+		<td>성별</td>
+		<td>
+			<input type = "text" id = "gen">
+		</td>
+	</tr>
+	<tr>
+		<td>주소</td>
+		<td>
+			<input type = "text" id = "addr">
+		</td>
+	</tr>
+	<tr>
+		<td colspan = "2">
+			<input type = "button" value = "추가" onclick = "fn_add()">
+			<input type = "button" value = "수정" onclick = "fn_mod()">
+			<input type = "button" value = "삭제" onclick = "fn_del()">
+		</td>
+	</tr>
+</table>
+</body>
+</html>

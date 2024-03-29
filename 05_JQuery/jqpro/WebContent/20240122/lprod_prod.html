@@ -5,130 +5,169 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/public.css">
 <script src="../js/jquery-3.7.1.min.js"></script>
+
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-  $(()=>{
-	  //prod의 제품을 선택하면 prod_id를 기준으로 상세보기
-	  $('#prod').on('change',function(){
-		  idvalue = $('option:selected',this).val().trim();
-		  console.log(idvalue);
-		  
-		  if(idvalue != null) {
-			  
-		  //서버로 전송
-		  
-		  $.ajax({
-			  url : "/jqpro/20240122/prodIdServlet.jsp",
-			  type : 'post',
-			  data : 'id=' + idvalue,
-			  
-			  success : function(res){
-				  code = "<table border='1'>";
-				  code += "<tr><td>항목</td>";
-				  code += "<td>내용</td>";
-				  code += `<tr><td class="ftd">prod_id</td><td class="ltd">${res.prod_id}</td></tr>`;
-				  code += `<tr><td class="ftd">prod_name</td><td class="ltd">${res.prod_name}</td></tr>`;
-				  code += `<tr><td class="ftd">prod_lgu</td><td class="ltd">${res.prod_lgu}</td></tr>`;
-				  code += `<tr><td class="ftd">prod_buyer</td><td class="ltd">${res.prod_buyer}</td></tr>`;
-				  code += `<tr><td class="ftd">prod_cost</td><td class="ltd">${res.prod_cost}</td></tr>`;
-				  code += `<tr><td class="ftd">prod_price</td><td class="ltd">${res.prod_price}</td></tr>`;
-				  code += `<tr><td class="ftd">prod_sale</td><td class="ltd">${res.prod_sale}</td></tr>`;
-				  
-				  
-				  code+="</table>";
-				  $('#result1').html(code);
-			  },
-			  error : function(xhr){
-				  alert("상태 :" + xhr.status)
-			  },
-			  dataType : "json"
-		  })
-		  }
-	  })
-	  // lprod의 제품을 선택하면 lprod_gu와 prod_lgu를 비교
-	  $('#lprod').on('change',function(){
-		// 선택한 항목의 option value값 가져오기
-		  //alert($(this , 'option:selected').val());
-		guValue = $(this , 'option:selected').val().trim();
+$(()=>{
+	//prod의 제품을 선택하면 prod_id를 기준으로 상세보기 
+	$('#prod').on('change', function(){
 		
-		$.ajax({
-			url : "/jqpro/20240122/prodLguServlet.jsp",
-			type : "post",
-			data : "gu=" + guValue,
-			success : function(res){
-				code= "";
-				if(res.flag == "ok"){
-					$.each(res.datas,function(i,v){
-						code += `<option value = "${v.prod_id}" >${v.prod_name} </option>`;	
-					})
-					$('#prod').html(code);
-					$('#prod').trigger('change');
-				}else{
-					code += `<option value = "0" >데이터없음</option>`;
+		idvalue = $('option:selected', this).val().trim();
+		console.log(idvalue);
+		
+		if(idvalue != null){
+		   //서버로 전송 
+			$.ajax({
+				url : '/jqpro/0122/prodIdServlet.jsp',
+				type : 'post',
+				//data : 'id=' + idvalue,
+				data : JSON.stringify({ "prod_id" :idvalue }),
+				success : function(res){
+					code ="<table class='table table-striped' >";
 					
-					//result1의 내용을 지우고
+					code += "<tr><td>PROD_ID</td>";
+					code += "<td>" + res.prod_id + "</td></tr>"
+					
+					code += "<tr><td>PROD_NAME</td>";
+					code += "<td>" + res.prod_name + "</td></tr>"
+					
+					code += "<tr><td>PROD_LGU</td>";
+					code += "<td>" + res.prod_lgu + "</td></tr>"
+					
+					code += "<tr><td>PROD_PRICE</td>";
+					code += "<td>" + res.prod_price + "</td></tr>"
+					
+					code += "<tr><td>PROD_SALE</td>";
+					code += "<td>" + res.prod_sale + "</td></tr>"
+					
+					code += "<tr><td>PROD_COST</td>";
+					code += "<td>" + res.prod_cost + "</td></tr>";
+					
+					code += "<tr><td>PROD_BUYER</td>";
+					code += "<td>" + res.prod_buyer + "</td></tr>"
+					
+					code += "</table>";
+					
+					$('#result1').html(code);
+				},
+				error : function(xhr){
+					alert("상태 : " + xhr.status)
+				},
+				dataType  : 'json'
+			}) 
+		}//if
+	})
+	
+	
+	
+	//lprod의 제품을  선택하면  lprod_gu 와 prod_lgu 를 비교 prod제품을 출력 
+	$('#lprod').on('change', function(){
+		//lprod(부모)에서 선택한 항목의 option(자식) value값을 가져온다 
+		
+		//alert($('option:selected', this).val().trim());
+		guvalue = $('option:selected', this).val().trim();
+		console.log(guvalue);
+		
+		
+		//JSON.stringify() : script의 객체를 json문자열로 직렬화 
+		//서버로 전송
+		$.ajax({
+			url :'/jqpro/0122/prodLguServlet.jsp',
+			type : 'post',
+			//data  : 'gu=' + guvalue,
+			data : JSON.stringify({"prod_lgu" : guvalue }),
+			success : function(res){
+				//alert("성공");
+				code = "";
+				if(res.flag == "ok"){
+				  $.each(res.datas, function(i,v){
+					  code += `<option value="${v.id}">${v.nm}</option>`
+				  })
+				  
+				  $('#prod').html(code);
+				  $('#prod').trigger('change');
+				}else{
+					code += `<option value="0">데이타없슴</option>`;
+					
+					//result1의 내용을 지우고 
 					$('#result1').empty();
-					//result1에 이미지를 삽입
-					img = `<img src = "../images/spongebob.png" alt = "spongebob.png">`
-					$('#result1').append(img);
+					
+					//result1에 스폰지밥 같은 이미지를 삽입 
+					vimg = $('<img src="../images/pattern.jpg" alt="pattern.jpg">');
+					$('#result1').append(vimg);
+					
 					$('#prod').html(code);
 				}
 			},
 			error : function(xhr){
-				alert("상태 : " + xhr.status);
+				alert("상태 : " + xhr.status); // 200, 404
 			},
-			dataType : "json"
+			dataType : 'json'
+		})
+	})
+	
+	//lprod가 출력 
+	$('#btn1').on('click', ()=>{
+		
+		$.ajax({
+			url : '/jqpro/0119/LprodServlet.jsp',
+			type : 'get',
+			success : res =>{
+				
+			  code = "";
+			  $.each(res, function(i,v){
+				  code += `<option value="${v.lprod_gu}">${v.lprod_nm}</option>`
+			   
+			  })
+			  $('#lprod').html(code);
+			  $('#lprod').trigger('change');
+			  // $('#lprod').append(code);
+			},
+			error : function(xhr){
+				alert("상태 : " + xhr.status)
+			},
+			dataType : 'json'
 			
 		})
-	  })
-	  
-	  // lprod 출력
-	  $('#btn1').on('click',()=>{
-		  $.ajax({
-			  url : "/jqpro/20240119/LprodServlet.jsp",
-			  type : "get",
-			  success : function(res){
-				code = "";
-				$.each(res,function(i,v){
-					code += `<option value = "${v.lprod_gu}" >${v.lprod_nm} </option>`;
-					
-				})
-				$('#lprod').html(code);
-				$('#lprod').trigger(code);
-			  },
-			  error : function(xhr){
-				  alert("상태 : " + xhr.status)
-			  },
-			  dataType : "json"
-		  })
-	  })
-	  
-  })
+	})
+})
 </script>
-<style>
-.ltd{
-width : 300px;
-}
-.ftd{
-width : 150px;
-}
-img{
-width : 80%;
-height : 80%;
-}
-</style>
 </head>
 <body>
-  <div class="box">
-    <h4></h4>
-    <input type="button" value="확인" id="btn1" /> 
-    <br /><br />
-    <select id = lprod>
-    
-    </select>
-    <select id = prod>
-    </select>
-    <div id="result1"></div>
-  </div>
 
+<div class="box">
+<h4>  </h4>
+<input type="button" value="확인" id="btn1">
+<br><br>
+
+<div class="container mt-3">
+ 
+  <form>
+    <label for="lprod" class="form-label">Lprod 리스트</label>
+    <select class="form-select" id="lprod" name="sellist1">
+    </select>
+    <br>
+    
+    <label for="prod" class="form-label">Prod 리스트</label>
+    <select class="form-select" id="prod" name="sellist2">
+    </select>
+   
+  </form>
+</div>
+
+<div id="result1"></div>
+</div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+

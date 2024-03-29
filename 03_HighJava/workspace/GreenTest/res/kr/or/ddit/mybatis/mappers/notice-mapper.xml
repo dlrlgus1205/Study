@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice">
+
+
+	<insert id="insertNotice" parameterType="noticeVo">
+		<selectKey keyProperty="notice_no" order="BEFORE" resultType="int">
+			select notice_seq.nextval notice_no from dual
+		</selectKey>
+		
+		insert into notice(notice_no, notice_title,notice_content, notice_date, admin_id) 
+		values( #{notice_no}, #{notice_title},#{notice_content}, SYSDATE, #{admin_id})
+	
+	</insert> 
+	
+	<!-- <update id="updatePost" parameterType="postVo">
+		update post
+		set post_title = #{post_title},
+			post_content = #{post_content},
+			post_writer = #{post_write},
+			post_update_date = #{
+			
+		
+	
+	</update>
+ -->
+ 
+ 	<select id="getAllNotice" resultType="noticeVo">
+ 	
+ 		select notice_no,
+ 		admin_id,
+        notice_title,
+        to_char(notice_date, 'yyyy-mm-dd')as notice_date,
+        notice_content  
+ 		from notice
+ 		
+ 		
+ 		
+ 	</select>
+ 	
+ 	
+ 	<resultMap type="NoticeVO" id="noticeMap">
+ 		<result column="NOTICE_NO" property="notice_no"/>
+ 		<result column="NOTICE_TITLE" property="notice_title"/>
+ 		<result column="NOTICE_CONTENT" property="notice_content"/>
+ 		<result column="NOTICE_DATE" property="notice_date"/>
+ 		<result column="ADMIN_ID" property="admin_id"/>
+ 		<result column="REPORT_YN" property="report_yn"/>
+ 		<result column="REPORT_COUNT" property="report_count"/>
+ 		<result column="BOARD_NO" property="board_no"/>
+ 	
+ 	
+ 		<collection property="imgList" column="notice" select="notice.getImgList"/>
+ 	</resultMap>
+ 	
+ 	
+ 	
+ 	<select id="getImgList" parameterType="int" resultType="ImgVO">
+ 		select * from img where notice_no = #{notice_no}
+ 	</select>
+ 	
+ 	
+ 	<select id="detailNotice" resultType="noticeVo" parameterType="int">
+ 		
+<!--  		select * -->
+<!--   		  from post a inner join member b  -->
+<!--   		  on a.mem_id = b.mem_id inner join img c on a.post_no =c.post_no -->
+<!--   		  where a.post_no= #{data} -->
+ 		
+ 		select notice_no,
+ 			   admin_id,
+ 			   to_char(notice_date, 'yyyy-mm-dd')as notice_date,
+ 			   notice_title,
+ 			   notice_content
+ 			   from notice
+ 			   	where notice_no= #{notice_no}
+ 	
+ 	</select>
+ 	
+ 	<!-- <update id="deleteNotice" parameterType="int">
+ 	
+ 		update post set
+ 		post_delyn ='Y'
+ 		where post_no = #{post_no}
+ 		
+ 	</update> -->
+ 	
+ 	<update id="updateNotice" parameterType="noticeVo">
+ 		      UPDATE notice 
+			SET 
+   			 notice_title = #{notice_title},
+    		 notice_content = #{notice_content}
+				WHERE 
+   				 notice_no = #{notice_no}
+ 	</update>
+
+</mapper>
+

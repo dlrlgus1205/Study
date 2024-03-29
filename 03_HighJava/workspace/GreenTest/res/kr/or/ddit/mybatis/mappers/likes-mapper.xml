@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="likes">
+
+
+
+	<!-- 2024.02.15 한요한 업로드============================================== -->
+	<!-- 식물위키 좋아요 기능  -->
+	<insert id="wikiLike" parameterType="map">
+		INSERT INTO LIKES VALUES(LIKES_SEQ.NEXTVAL, #{post_no}, #{mem_id})
+	</insert>
+	
+	<!-- 식물위키 좋아요 삭제 기능  -->
+	<delete id="likeDelete" parameterType="map">
+		DELETE 
+          FROM LIKES 
+         WHERE POST_NO = #{post_no}
+           AND MEM_ID  = #{mem_id}
+	</delete>
+	
+	<!-- 식물위키 좋아요 확인 기능  -->
+	<select id="likeSelect" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+         FROM LIKES
+        WHERE POST_NO = #{post_no}
+          AND MEM_ID  = #{mem_id}
+	</select>
+
+	<!-- 식물위키 좋아요 수 확인 기능  -->
+	<select id="likesCount" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+          FROM LIKES
+         WHERE POST_NO = #{post_no}
+	</select>
+	
+	
+	<!-- ================================================================= -->
+	
+</mapper>
+

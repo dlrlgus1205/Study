@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+function fn_mod_act(){
+	document.frm.submit();
+}
+</script>
+</head>
+<body>
+<form action="mem_mod_act" name="form" method="post">
+<table border="1">
+	<tr>
+		<th>사원번호</th>
+		<td><input type="text" value="{{vo.e_id}}" name="e_id"></td>
+	</tr>
+	<tr>
+		<th>사원이름</th>
+		<td><input type="text" value="{{vo.e_name}}" name="e_name"></td>
+	</tr>
+	<tr>
+		<th>사원성별</th>
+		<td><input type="text" value="{{vo.gen}}" name="gen"></td>
+	</tr>
+	<tr>
+		<th>사원주소</th>
+		<td><input type="text" value="{{vo.addr}}" name="addr"></td>
+	</tr>
+	<tr>
+		<td colspan = "2">
+			<input type ="button" value="저장" onclick = "fn_mod_act()">
+			<input type ="button" value="취소">
+		</td>
+	</tr>
+</table>
+</form>
+
+</body>
+</html>

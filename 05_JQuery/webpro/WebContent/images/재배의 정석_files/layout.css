@@ -1,0 +1,275 @@
+/*
+ *작성자 : 이병욱*
+ *2016-02-29 최초작성일*
+ *메인/서브 레이아웃 구성만 들어갑니다.*
+*/
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(../fonts/font.css);
+
+html { position: relative; min-height: 100%; }
+body { margin-bottom:100px;  font-family : 'Nanum Gothic', malgun Gothic, 맑은고딕, dotum, 돋움, sans-serif; min-width:320px; position:static; width:auto;}
+html, body { height: auto; }
+body img{max-width:100%;}
+ul{list-style:none; margin: 0; padding: 0; }
+
+a, a:hover { text-decoration: none; }
+
+#accessibility { position:absolute; left: 0; top:0; right:0;  width:100%; overflow:hidden; z-index:1000; margin:0; }
+#accessibility a{ display:block; overflow:hidden; height:1px; width:1px; margin:0 -1px -1px 0; font-size:0; line-height:0; text-align:center}
+#accessibility a:focus, #accessibility a:hover, #accessibility a:active { width:auto; height:20px; margin:0; padding:8px 0 0 0; background:#20262c; font-size:12px;font-weight:700;line-height:1;color:#fff;}
+
+
+/* 헤더영역 */
+.page-with-top-menu { padding:0; }
+.main-navbar { position: relative; background-color: #2fbfc6; border-bottom:solid 1px #01466c; color: #fff; z-index: 10;}
+
+.main-navbar-fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height:55px;
+    z-index: 101;
+}
+
+#header {
+	background:#fff;
+	height: 60px;
+	border-bottom: solid 1px #ddd;
+}
+
+.navbar-header { padding-right: 20px;border: 0;  }
+.navbar-header .navbar-brand { width: auto; margin: 0; display: inline-block; float: none; padding: 10px 0 0; font-size: 18px; color: #222; line-height: 30px; }
+
+.navbar-header .navbar-toggle,
+.navbar-header .search-toggle { position:absolute; width: 50px; height:50px; line-height:50px; text-align: center; color: #999; font-size: 18px; }
+.navbar-header .navbar-toggle:hover,
+.navbar-header .search-toggle:hover { background: #fafafa; }
+
+.navbar-header .navbar-toggle { margin: 0; border-radius: 0; border:0; border-right: solid 1px #ddd; left: 0; }
+.navbar-header .navbar-toggle .icon-bar+.icon-bar { margin-top: 5px; }
+.navbar-header .navbar-toggle .icon-bar { width: 26px; }
+
+.navbar-header .search-toggle { right: 0; border-left: solid 1px #ddd; }
+.navbar-header .search-toggle i { line-height:50px; }
+
+.nav.navbar-nav > li > a { height: 60px; color:#999; }
+.nav.navbar-nav > li a:hover { background: #eee;  color:#333; opacity: 1; }
+.nav.navbar-nav > li a i { font-size: 18px; }
+.nav.navbar-nav > li a .material-icons {font-size: 32px; }
+.nav.navbar-nav > li.navbar-user a.dropdown-toggle {  padding: 27px 15px; }
+
+/* 검색 */
+.search_div { position: relative; }
+.search_inner {  width:280px; height: 60px;border-left:solid 1px #e5e5e5; }
+.search_inner .search_input { width:100%; height: 50px; float:left; padding:0 0 0 12px; font-size:14px; color: #999; border:0; }
+.search_inner .search_btn {
+	background:none;
+	position:absolute;
+	top:18px;
+	right:0;
+	height: 32px;
+	display: inline-block;
+	text-align: center; color: #999;
+	border: 0;
+	font-weight: 600; font-size: 32px;
+}
+.search_inner .search_btn i{ font-size: 32px; }
+.search_inner .search_btn:hover { color: #222;  }
+
+/* 상단메뉴 */
+.top-menu { background:none; height: 40px; position: relative; top: 0; left: 20px; right: 0; z-index: 1015; float: left;  }
+.top-menu .nav { float: left; margin: 0!important; }
+.top-menu .nav > li {   }
+.top-menu .nav > li:first-child a:before { content:''; }
+.top-menu .nav > li a:before { content:''; position: absolute; height: 20px; top: 50%; left: 0; margin-top: -15px; color: #ddd; }
+.top-menu .nav > li > a { position: relative;  display: inline-block; color: #777; line-height:39px; font-size: 13px; cursor: pointer; }
+.top-menu .nav > li:hover > a,
+.top-menu .nav > li:focus > a,
+.top-menu .nav > li > a:hover,
+.top-menu .nav > li > a:focus {
+    background: #f5f5f5; color: #222;
+}
+
+.top-menu .nav .sub-menu { display: none; position: absolute; left: 0; width: 180px; top: 100%; background: #f5f5f5; list-style-type: none; margin: 0; padding: 0 0; }
+.top-menu .sub-menu > li { border-bottom: solid 1px #ddd; }
+.top-menu .sub-menu > li > a { padding: 14px 10px 11px; display: block; font-size: 13px; color: #999; text-decoration: none; position: relative;}
+.top-menu .sub-menu > li.active > a,
+.top-menu .sub-menu > li.active > a:hover,
+.top-menu .sub-menu > li.active > a:focus,
+.top-menu .sub-menu > li > a:hover,
+.top-menu .sub-menu > li > a:focus {
+	background:#4db6ac;
+    color: #fff;
+}
+.top-menu .sub-menu > li a:before { content:''; }
+
+.top-menu .nav > li.has-sub:hover > .sub-menu { display: block; }
+.top-menu .nav > li.active > a,
+.top-menu .nav > li.active > a:hover,
+.top-menu .nav > li.active > a:focus{
+    background: #f5f5f5; color: #333;
+}
+
+
+#nav_mobile{display:block;position:fixed;top:0;left:-260px;width:100%;height:100%;z-index:8000;}
+#nav_mobile .nav_mask {background-color: #000; display: none; top:0;left: 0; position:fixed; top: 0;width:100%;height:100%;z-index:8000;opacity:0.8;overflow-y:hidden}
+#nav_mobile .nav_mobile{position:absolute;top:0;left:0;max-width:260px;width:260px;height:100%;margin:0;z-index:8500;background: #fff;overflow:hidden;}
+#nav_mobile .nav_mobile .mobile_top{position:relative;z-index:50000;padding:18px 25px;background:#f6f6f6; font-size: 18px; }
+#nav_mobile .btn_mclose{position:absolute;top:20px;right:22px;z-index:55000;}
+#nav_mobile .nav_mobile .nav{float:none;margin:0;overflow:auto;height:100%;padding-top:70px;margin-top:-70px;}
+#nav_mobile .nav_mobile .nav li{width:100%;font-size:15px;}
+#nav_mobile .nav_mobile .nav li > a{padding:12px 0 12px 20px;border-bottom:1px solid #eee;color:#696969; font-family:"notokr-regular"; }
+#nav_mobile .nav_mobile .nav li > a:hover, .nav li > a:focus  { }
+
+#nav_mobile .nav_mobile .nav .open > a, #nav_mobile .nav_mobile  .nav .open > a:focus, .nav .open > a:hover, .nav .open > a.active{background:#fff;color:#0089d0;;background:url('../images/common/bg_toggle_down.png') 93% center no-repeat;}
+#nav_mobile .nav_mobile .nav .dropdown-menu{position:relative;width:100%;padding:0;box-shadow:none;border:none;background:#f6f6f6;border-bottom:1px solid #e1e1e1}
+#nav_mobile .nav_mobile .nav .dropdown-menu ul{padding:0;}
+#nav_mobile .nav_mobile .nav .dropdown-menu li a{display:block;border:none;padding:10px 30px;;color:#666666;font-size:15px;background:none;}
+#nav_mobile .nav_mobile .nav .dropdown-menu li a:hover,
+#nav_mobile .nav_mobile .nav .dropdown-menu li.active > a,
+#nav_mobile .nav_mobile .nav .dropdown-menu li a.active{background:#e3eff6;color:#0089d0;text-decoration:none;}
+#nav_mobile .nav_mobile .nav ul{height:100%;}
+
+#nav_mobile .profile  { background: #fafafa; padding:20px 0 ; border-bottom: solid 1px #d5d5d5; }
+#nav_mobile .profile .user_info { text-align: center;   }
+#nav_mobile .profile .user_info .img { width: 80px; height:80px; display: inline-block; border-radius: 50%; overflow:hidden; }
+#nav_mobile .profile .user_info .img img {  }
+#nav_mobile .profile .user_info .txt { margin: 5px 0 0; font-size: 14px; }
+#nav_mobile .profile .user_info .login_btn { margin-top: 10px; border-radius: 50px;  }
+#nav_mobile .profile .user_info .join_btn { display: block; margin-top: 15px; color: #666; clear: both;  }
+
+#nav_mobile .profile .user_info ul { float:none; display: inline-block; margin:10px 0 0; height:100%; }
+#nav_mobile .profile .user_info ul li{ position: relative; display: inline-block; float: left; font-size:16px;}
+#nav_mobile .profile .user_info ul li > a	{ display: block; text-align: center; padding:8px 15px;color:#999; font-size: 11px; font-family:"notokr-regular"; }
+#nav_mobile .profile .user_info ul li > a:hover, .nav li > a:focus  { color:#696969; }
+
+#nav_mobile .profile .user_info .line {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -10px;
+    width: 1px;
+    height: 25px;
+    background: #ddd;
+}
+
+/**/
+.checkSearch { position:relative; max-width: 500px; margin:100px auto 0; text-align: center; }
+.checkSearch .main_logo { margin: 0 0 35px; }
+.checkSearch .main_logo img { max-width:100%; height: auto; }
+.checkSearch .searchCont { background: #fff; display: block; height:50px; padding: 8px 0; box-shadow: 0 2px 3px #bbb; }
+.checkSearch .searchCont .searchInput {
+	width: 100%;
+	padding: 0 15px;
+	line-height: 35px;
+	font-size: 15px;
+	border:0;
+	outline:none;
+}
+.checkSearch .searchBtn { display: inline-block; margin: 20px 0 0 ;}
+.checkSearch .searchBtn .search_toggle {
+	background: #eee;
+	border:solid 1px #ccc;
+	padding: 10px 15px;
+	color: #888;
+	font-size: 15px;
+	font-weight: bold;
+}
+.checkSearch .searchBtn .search_toggle:hover {
+	border:solid 1px #aaa;
+	color: #333;
+	font-weight: bold;
+}
+
+.wasCont { background: #fff; }
+.wasCont .wasTable {  }
+.wasCont .wasTable .table {  }
+.wasCont .wasTable .table th { text-align: center; padding: 15px 0; font-size: 15px; }
+.wasCont .wasTable .table td { padding: 15px 0; font-size: 14px; }
+
+.alert { position:relative; }
+.alert i { position: absolute; height: 20px; top: 50%; left: 20px; margin-top: -18px; }
+.alert .pull-left { padding: 0 0 0 60px; }
+
+/* 카피라이트 */
+.footer { width: 100%; position: absolute; bottom: 0; height:100px; margin: 0; background:#333438; }
+
+.footer_menu{ display: none;}
+.footer .copy_logo { display:block; text-align: center; }
+
+.footer .footer_info {width: 100%; padding: 10px 0 0 0; text-align: center; }
+.footer .footer_info .info_btn { float:right; display: inline-block;  padding:0; margin:0; }
+.footer .footer_info .info_btn li { position: relative; float: left; background:url(/assets_common/images/user/copy_btn_line.png) no-repeat left; padding: 0 15px; }
+.footer .footer_info .info_btn li:before { content: '|'; position: absolute; left: 0; }
+.footer .footer_info .info_btn li:first-child { padding-left: 0; background: none; }
+.footer .footer_info .info_btn li:first-child:before { content: ''; }
+.footer .footer_info .info_btn li A { color:#ccc; text-align: left; font-size: 12px;  }
+
+.footer .footer_info .info_text { float:left; color:#aaa; font-size:13px; margin: 6px 0 0; }
+.footer .footer_info .copy_text { text-align: center; color:#999; font-size:12px; }
+
+
+.footer_menu { width:100%; height:64px; z-index: 99; }
+.footer_menu ul { height:64px; background: #404040; display: block; margin: 15px 0 0;  }
+.footer_menu li { position:relative; width: 20%; float: left; height:64px; margin:10px 0 0; }
+.footer_menu li A { height:80px; display: block; color:#eee; text-align: center; vertical-align: middle; text-decoration: none; }
+.footer_menu li A p { font-size:13px;  }
+.footer_menu li A span { font-size: 24px; }
+
+
+@media (max-width: 767px) {
+}
+
+@media (min-width: 768px) {
+  	.navbar-ul { top:0; right:10px; }
+}
+@media(max-width:991px){
+
+	.footer .footer_info .info_btn { float:none; }
+	.footer .footer_info .info_text { float:none; text-align: center; }
+
+	.pace-progress { top:54px; }
+	.page-header-fixed { padding-top:50px;}
+}
+@media(min-width:992px) {
+
+}
+
+
+@media(max-width:1199px) {
+
+	.page-with-top-menu { padding:50px 0 0; }
+	/*헤더영역*/
+	#header { background:#fff; height: 50px;border-bottom: solid 1px #ddd;}
+	#header .container { width: 100%; height: 50px; padding: 0; }
+	#header .container-fluid { width: 100%; padding: 0; }
+
+	#sub_container { margin: 0px 0 0; }
+
+	/* 검색 */
+	.search_div { position: absolute; top: 0; left: 50px; right: 50px; }
+	.search_inner {  width:100%; height: 50px;  border-left:solid 1px #ddd; padding:0; }
+	.search_inner .search_input { width:100%; height: 50px; float:left;  padding:0px 0 0 12px; color: #999; border:0; }
+	.search_inner .search_btn { display: none; }
+
+	#top-menu {display: none!important; }
+
+	.navbar-header { width: 100%; height: 50px; padding: 0; text-align: center;  }
+	.navbar-header .icon-bar  { background: #555; }
+	.navbar-header .navbar-brand { width: auto; margin: 5px 0 0; display: inline-block; float: none; padding:0; font-size: 18px; color: #222; line-height: 0; }
+	.navbar-header .navbar-brand img { height: 40px; }
+	.navbar-header .navbar-toggle { display: block;  }
+
+	.nav.navbar-nav { display: none; }
+
+}
+@media(min-width:1200px) {
+
+	.page-with-top-menu { padding:72px 0 0; }
+
+	.search_div { display: block!important; float: right; }
+	.navbar-header .search-toggle { display: none; }
+
+}

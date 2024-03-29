@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("btn").bind("click",function(){
+		mc();
+	})
+})
+function mc() {
+	let obj_mine = document.getElementById("it_mine");
+	let obj_com = document.getElementById("it_com");
+	let obj_result = document.getElementById("it_result");
+	
+	let mine = obj_mine.value;
+	let com = "";
+	let result = "";
+	
+	let rnd = Math.random();
+	if(rnd > 0.66){
+		com = "보";
+	}
+	else if(rnd > 0.33) {
+		com = "바위";
+	}
+	else {
+		com = "가위";
+	}
+	
+	if(com == mine) {
+		result = "무승부";
+	}
+	else if((com == "보" && mine == "가위") || (com == "가위" && mine == "바위") || (com == "바위" && mine == "보")){
+		result = "승리";
+	}
+	else if((com == "바위" && mine == "가위") || (com == "가위" && mine == "보") || (com == "보" && mine == "바위")){
+		result = "패배";
+	}
+	
+	obj_com.value = com;
+	obj_result.value = result;
+};
+</script>
+<style type="text/css">
+input{
+	width: 40px;
+}
+</style>
+</head>
+<body>
+JS08<br>
+<table border = "1">
+	<tr>
+		<td>나 : </td>
+		<td>
+			<input  type = "text" id = "it_mine">
+		</td>
+	</tr>
+	<tr>
+		<td>컴 : </td>
+		<td>
+			<input  type = "text" id = "it_com">
+		</td>
+	</tr>
+	<tr>
+		<td>결과 : </td>
+		<td>
+			<input  type = "text" id = "it_result">
+		</td>
+	</tr>
+	<tr>
+		<td colspan = "2">
+			<input  type = "button" value = "실행" id = "btn">
+		</td>
+	</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="jquery-3.7.1.js"></script>
+<script>
+
+</script>
+<style>
+td{
+	text-align: center;
+}
+</style>
+</head>
+<body onload = "fn_list()">
+EXAM<br>
+<table border = "1">
+	<tr>
+		<td>사번</td>
+		<td>이름</td>
+		<td>성별</td>
+		<td>주소</td>
+	</tr>
+	<tbody id = "mytbody">
+		<tr>
+			<td colspan = "7">
+			검색된 데이터가 없습니다
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table border = "1">
+	<tr>
+		<td>번호</td>
+		<td>
+			<input type = "text" id = "e_id">
+		</td>
+	</tr>
+	<tr>
+		<td>문제</td>
+		<td>
+			<input type = "text" id = "e_que">
+		</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>
+			<input type = "text" id = "e_ans1">
+		</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>
+			<input type = "text" id = "e_ans2">
+		</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>
+			<input type = "text" id = "e_ans3">
+		</td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>
+			<input type = "text" id = "e_ans4">
+		</td>
+	</tr>
+	<tr>
+		<td>정답</td>
+		<td>
+			<input type = "text" id = "e_ans">
+		</td>
+	</tr>
+	<tr>
+		<td colspan = "2">
+			<input type = "button" value = "추가" onclick = "fn_add()">
+			<input type = "button" value = "수정" onclick = "fn_mod()">
+			<input type = "button" value = "삭제" onclick = "fn_del()">
+		</td>
+	</tr>
+</table>
+</body>
+</html>

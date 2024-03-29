@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="post">
+
+	
+		<!-- 2024.02.07 한요한 ========================================================= -->
+	<!-- 식물위키 추가 -->
+	<insert id="wikiInsert" parameterType="PostVO">
+		INSERT INTO POST
+        VALUES(POST_SEQ.NEXTVAL, #{post_title}, #{post_content}, SYSDATE, 
+               SYSDATE, 0, 'N', #{mem_id}, 'N', 0, #{category_no}, #{board_no})
+	</insert>
+	
+	<!-- 식물위키 삭제 -->	
+	<update id="wikiDelete" parameterType="PostVO">
+		UPDATE POST
+           SET POST_DELYN = 'Y'
+         WHERE POST_NO  = #{post_no}
+           AND MEM_ID   = #{mem_id}
+	</update>
+	
+	<!-- 식물위키 전체 리스트 출력(좋아요수 포함)-->
+	<select id="wikiListAll" parameterType="int" resultType="PostVO">
+		  SELECT 
+			    p.POST_NO,
+			    p.POST_TITLE,
+			    p.POST_CONTENT,
+			    p.POST_WRITE_DATE,
+			    p.POST_UPDATE_DATE,
+			    p.POST_COUNT,
+			    p.POST_DELYN,
+			    p.MEM_ID,
+			    p.REPORT_YN,
+			    p.REPORT_COUNT,
+			    p.CATEGORY_NO,
+			    p.BOARD_NO,
+			    COUNT(l.LIKES_NO) AS TOTAL_LIKES
+			FROM 
+			    POST p
+			LEFT JOIN 
+			    LIKES l ON p.POST_NO = l.POST_NO
+			WHERE
+			    p.BOARD_NO = 1  
+			    AND p.POST_DELYN = 'N'  
+			GROUP BY 
+			    p.POST_NO, p.POST_TITLE, p.POST_CONTENT, p.POST_WRITE_DATE, 
+			    p.POST_UPDATE_DATE, p.POST_COUNT, p.POST_DELYN, p.MEM_ID, p.REPORT_YN, 
+			    p.REPORT_COUNT, p.CATEGORY_NO, p.BOARD_NO
+			ORDER BY 
+   				p.POST_NO DESC
+	</select>
+	
+	<!-- 식물위키 상세 페이지 출력-->
+	<select id="wikiDetail" parameterType="int" resultType="PostVO">
+		SELECT *
+          FROM POST
+         WHERE POST_NO = #{post_no}
+	</select>
+	
+	<!-- 식물위키 수정 -->
+	<update id="wikiUpdate" parameterType="PostVO">
+		UPDATE POST 
+           SET POST_TITLE   = #{post_title},
+               POST_CONTENT = #{post_content}
+         WHERE POST_NO      = #{post_no}
+	</update>
+	
+	<!-- 식물위키 조회수 -->
+	<update id="wikiCount" parameterType="int">
+		UPDATE POST 
+           SET POST_COUNT   = POST_COUNT + 1
+         WHERE POST_NO      = #{post_no}
+	</update>
+	
+	<!-- 식물위키 검색 결과 출력-->
+	<select id="wikiSearch" parameterType="map" resultType="PostVO">
+		SELECT * FROM POST 
+         WHERE BOARD_NO= #{board_no}
+           AND (POST_TITLE   LIKE '%'||#{param}||'%'
+            OR  POST_CONTENT LIKE '%'||#{param}||'%')
+         ORDER BY POST_NO DESC
+	</select>
+	<!-- ================================================================= -->
+
+	<!-- 식물스타그램 전체 리스트 출력 -->
+<select id = "starListAll" parameterType="int"  resultType = "PostVO">
+		  SELECT 
+			    p.POST_NO,
+			    p.POST_TITLE,
+			    p.POST_CONTENT,
+			    p.POST_WRITE_DATE,
+			    p.POST_UPDATE_DATE,
+			    p.POST_COUNT,
+			    p.POST_DELYN,
+			    p.MEM_ID,
+			    p.REPORT_YN,
+			    p.REPORT_COUNT,
+			    p.CATEGORY_NO,
+			    p.BOARD_NO,
+			    COUNT(l.LIKES_NO) AS TOTAL_LIKES
+			FROM 
+			    POST p
+			LEFT JOIN 
+			    LIKES l ON p.POST_NO = l.POST_NO
+			WHERE
+			    p.BOARD_NO = 3  
+			    AND p.POST_DELYN = 'N'  
+			GROUP BY 
+			    p.POST_NO, p.POST_TITLE, p.POST_CONTENT, p.POST_WRITE_DATE, 
+			    p.POST_UPDATE_DATE, p.POST_COUNT, p.POST_DELYN, p.MEM_ID, p.REPORT_YN, 
+			    p.REPORT_COUNT, p.CATEGORY_NO, p.BOARD_NO
+			ORDER BY 
+   				p.POST_NO DESC
+	</select>
+	
+	<!-- 식물스타그램 글 작성 -->
+	<insert id="starInsert" parameterType="postVO">
+		<selectKey keyProperty="post_no" order="BEFORE" resultType="int">
+			select post_seq.nextval post_no from dual
+		</selectKey>
+		
+		insert into post(post_no, post_title,post_content, post_write_date, post_update_date, post_count, post_delyn, mem_id, report_yn, report_count, category_no, board_no) 
+		values(#{post_no}, #{post_title},#{post_content}, SYSDATE, SYSDATE, 0, 'N', #{mem_id}, 'N', 0, #{category_no}, #{board_no})
+	
+	</insert> 
+
+	<!-- 식물스타그램 글 수정 -->
+	<update id = "starUpdate" parameterType = "PostVO">
+		update post set post_content = #{post_content}, post_update_date = SYSDATE
+		 where post_no = #{post_no}
+	</update>
+	
+	<!-- 식물스타그램 글 삭제 -->
+	<update id="starDelete" parameterType = "PostVO">
+		update post set post_delyn = 'y'
+		 where mem_id = #{mem_id}
+		   and post_no = #{post_no}
+	</update>
+	
+	
+	
+	
+	<!-- ========자유게시판========= -->
+<!-- 	<select id="selectByPage" parameterType="map" resultType="postVo">
+	
+	select A.* from
+		(select rownum as rnum, B.*from
+			<include refid="dynamicCondtion"/>
+			order by num desc ) B
+			<![CDATA[
+				where rownum <= #{end} ) A
+					where A.rnum >= #{start}
+			]]>
+	
+	</select>
+	
+	<select id="getTotalCount" parameterType="map" resultType="int">
+	
+		select post_count
+			from post
+		<include refid ="dynamicCondition"/>
+			
+	
+	</select>
+	-->
+	
+	<insert id="insertPost" parameterType="postVo">
+		<selectKey keyProperty="post_no" order="BEFORE" resultType="int">
+			select post_seq.nextval post_no from dual
+		</selectKey>
+		
+		insert into post(post_no, post_title,post_content, post_write_date, post_update_date, post_count, post_delyn, mem_id, report_yn, report_count, category_no, board_no) 
+		values(#{post_no}, #{post_title},#{post_content}, SYSDATE, SYSDATE, 0, 'N', #{mem_id}, 'N', 0, #{category_no}, #{board_no})
+	
+	</insert> 
+	
+	<!-- <update id="updatePost" parameterType="postVo">
+		update post
+		set post_title = #{post_title},
+			post_content = #{post_content},
+			post_writer = #{post_write},
+			post_update_date = #{
+			
+		
+	
+	</update>
+ -->
+ 
+ 	<select id="getAllPost" parameterType="BlacklistVO" resultType="postVo">
+ 	
+ 		select post_no,
+ 		mem_id,
+        post_title,
+        to_char(post_write_date, 'yyyy-mm-dd')as post_write_date,
+        post_count  
+ 		from post
+ 		where post_delyn ='N' and board_no = 2
+ 		<if test="mem_id!=null and mem_id!=''">
+ 			AND MEM_ID NOT IN(SELECT BLACKLIST_ID FROM BLACKLIST WHERE MEM_ID = #{mem_id})
+ 		</if>
+ 	</select>
+ 	
+ 	
+ 	<resultMap type="PostVO" id="postMap">
+ 		<result column="POST_NO" property="post_no"/>
+ 		<result column="POST_TITLE" property="post_title"/>
+ 		<result column="POST_CONTENT" property="post_content"/>
+ 		<result column="POST_WRITE_DATE" property="post_write_date"/>
+ 		<result column="POST_UPDATE_DATE" property="post_update_date"/>
+ 		<result column="POST_COUNT" property="post_count"/>
+ 		<result column="POST_DELYN" property="post_delyn"/>
+ 		<result column="MEM_ID" property="mem_id"/>
+ 		<result column="REPORT_YN" property="report_yn"/>
+ 		<result column="REPORT_COUNT" property="report_count"/>
+ 		<result column="CATEGORY_NO" property="category_no"/>
+ 		<result column="BOARD_NO" property="board_no"/>
+ 	
+ 		<association property="memVo" column="mem_id" select="post.getMember"/>
+ 		<collection property="imgList" column="post_no" select="post.getImgList"/>
+ 	</resultMap>
+ 	
+ 	<select id="getMember" parameterType="String" resultType="MemberVO">
+ 		select * from member where mem_id=#{mem_id}
+ 	</select>
+ 	
+ 	<select id="getImgList" parameterType="int" resultType="ImgVO">
+ 		select * from img where post_no = #{post_no}
+ 	</select>
+ 	
+ 	
+ 	<select id="detailPost" resultMap="postMap" parameterType="int">
+ 		
+<!--  		select * -->
+<!--   		  from post a inner join member b  -->
+<!--   		  on a.mem_id = b.mem_id inner join img c on a.post_no =c.post_no -->
+<!--   		  where a.post_no= #{data} -->
+ 		
+ 		select post_no,
+ 			   mem_id,
+ 			   to_char(post_write_date, 'yyyy-mm-dd')as post_write_date,
+ 			   post_title,
+ 			   post_content,
+ 			   post_count
+ 			   from post
+ 			   	where post_no=#{data}
+ 	
+ 	</select>
+ 	
+ 	<update id="deletePost" parameterType="int">
+ 	
+ 		update post set
+ 		post_delyn ='Y'
+ 		where post_no = #{post_no}
+ 		
+ 	</update>
+ 	
+ 	<update id="updatePost" parameterType="postVo">
+ 		update post set
+ 		post_title=#{post_title},
+ 		post_content=#{post_content},
+ 		post_update_date =sysdate
+ 		where post_no = #{post_no}
+ 	</update>
+ 	
+ 	
+ 	<update id="updateCount" parameterType="int">
+		UPDATE POST 
+           SET POST_COUNT   = POST_COUNT + 1
+         WHERE POST_NO      = #{num}
+	</update>
+ 	<!-- 자유게시판 끝 -->
+ 	
+ 	
+
+</mapper>

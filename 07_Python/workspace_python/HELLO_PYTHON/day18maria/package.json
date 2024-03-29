@@ -1,0 +1,10 @@
+{
+	"scripts": {
+		"start": "node mari_select.js"
+	},
+	"dependencies": {
+		"express": "^4.18.3",
+		"node-mysql": "^0.4.2",
+		"sync-mysql": "^3.0.1"
+	}
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="jquery-3.7.1.js"></script>
+<script type="text/javascript">
+function myclick(){
+	var a = 0;
+	var b = 0;
+	
+	 fetch('/fetch1',  { method : "POST" })
+	 	.then((res) => res.json())
+	 	.then((data) => {
+	 	a = data.result;
+     })
+     
+	 fetch('/fetch2',  { method : "POST" })
+	 	.then((res) => res.json())
+	 	.then((data) => {
+	 	b = data.result;
+     })
+     
+     var sum = a + b;
+	 console.log("sum", sum);
+}
+</script>
+</head>
+<body>
+Fetch<br>
+<a href = "javascript:myclick()">Fetch</a>
+</body>
+</html>

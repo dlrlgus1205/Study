@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function fn_mod(){
+	location.href = "mem_mod?m_id={{vo.m_id}}";
+}
+function fn_del(){
+	location.href = "mem_del?m_id={{vo.m_id}}";
+}
+</script>
+</head>
+<body>
+<table border="1">
+	<tr>
+		<th>사번</th>
+		<td>{{vo.m_id}}</td>
+	</tr>
+	<tr>
+		<th>이름</th>
+		<td>{{vo.m_name}}</td>
+	</tr>
+	<tr>
+		<th>전화</th>
+		<td>{{vo.m_tel}}</td>
+	</tr>
+	<tr>
+		<th>메일</th>
+		<td>{{vo.m_email}}</td>
+	</tr>
+	<tr>
+		<td colspan ="2">
+			<input type="button" value="수정" onclick="fn_mod()">
+			<input type="button" value="삭제" onclick="fn_del()">
+		</td>
+	</tr>
+</table>
+<br>
+</body>
+</html>

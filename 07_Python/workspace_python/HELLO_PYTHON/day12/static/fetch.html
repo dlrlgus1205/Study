@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="jquery-3.7.1.js"></script>
+<script type="text/javascript">
+function myclick(){
+	 let param = new FormData();
+     param.append("menu", "짜장면");
+     
+	 fetch('/fetch',  { method : "POST", body: param }).then((res) => res.json()).then((data) => {
+         console.log(data);
+     })
+}
+</script>
+</head>
+<body>
+Fetch<br>
+<a href = "javascript:myclick()">Fetch</a>
+</body>
+</html>

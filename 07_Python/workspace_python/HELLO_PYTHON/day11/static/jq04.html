@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+function mc() {
+	let obj_it = document.getElementById("id");
+	let obj_div = document.getElementById("mydiv");
+	
+	let dan = obj_it.value;
+	let idan = parseInt(dan);
+	
+	let txt = "";
+	
+	for(let i = 1; i <= 9; i++){
+		txt += dan + "*" + i + "=" + (idan * i) + "<br>";
+	}
+	
+	obj_div.innerHTML = txt;
+};
+
+$(document).ready(function(){
+	$("btn").bind("click", function(){
+		mc();
+	});
+});
+</script>
+<style type="text/css">
+#it{
+	width: 40px;
+}
+#mydiv{
+	height: 300px;
+}
+</style>
+</head>
+<body>
+JS04<br>
+<table border = "1">
+	<tr>
+		<td>출력단수 : </td>
+		<td>
+			<input  type = "text" id = "it">
+		</td>
+	</tr>
+	<tr>
+		<td colspan = "2">
+			<input  type = "button" value = "출력하기" id = "btn"/>
+		</td>
+	</tr>
+	<tr>
+		<td colspan = "2">
+			<div id = "mydiv"></div>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

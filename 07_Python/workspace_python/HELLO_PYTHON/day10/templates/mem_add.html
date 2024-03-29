@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function fn_add_act(){
+	document.frm.submit();
+}
+</script>
+</head>
+<body>
+<form action="mem_add_act" name="frm" method="post">
+<table border="1">
+	<tr>
+		<th>사번</th>
+		<td><input type="text" name="m_id"></td>
+	</tr>
+	<tr>
+		<th>이름</th>
+		<td><input type="text" name="m_name"></td>
+	</tr>
+	<tr>
+		<th>전화</th>
+		<td><input type="text" name="m_tel"></td>
+	</tr>
+	<tr>
+		<th>메일</th>
+		<td><input type="text" name="m_email"></td>
+	</tr>
+	<tr>
+		<td colspan = "2">
+			<input type ="button" value="저장" onclick="fn_add_act()">
+			<input type ="button" value="취소">
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

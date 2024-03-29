@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mypost">
+
+<sql id="dynamicCondition">
+      <if test="!(stype == '' or sword == '')">
+         and ${stype} like  '%'||#{sword}||'%'
+       </if>
+</sql>
+
+<select id="getTotalCount"  parameterType="Map" resultType="int">
+	select count(*) from post
+	where board_no=#{board_no} and mem_id=#{mem_id} and category_no=#{category_no}
+	<include refid="dynamicCondition"/>
+</select>
+
+
+<select id="selctByPage" parameterType="Map" resultType="MyPostVO">
+select Y.* from 
+     (select rownum as rnum , X.* from
+        ( select A.*, C.CATEGORY_NAME, (select count(*) from likes b where b.post_no=a.post_no) cnt
+			from post A, CATEGORY C
+            where A.CATEGORY_NO = C.CATEGORY_NO and A.board_no=#{board_no} and A.mem_id=#{mem_id} and C.category_no=#{category_no}
+            <include refid="dynamicCondition"/>
+             order by  post_no desc ) X 
+            <![CDATA[ 
+            where rownum <= #{end} ) Y
+       where Y.rnum >= #{start} 
+         ]]>
+</select>
+	
+</mapper>

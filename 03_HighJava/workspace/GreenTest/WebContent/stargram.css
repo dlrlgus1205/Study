@@ -1,0 +1,310 @@
+@charset "UTF-8";
+
+body{ 
+	width: 100%;
+	height: 100vh;
+}
+
+body .wrap{
+	width: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+button {
+	border : 0;
+	background : transparent;
+}
+
+#w-btn {
+	position: absolute;
+    right: 20px; top: 120px;
+	padding : 1rem 4rem;
+	background-color: #568A35;
+	border-radius : 10px;
+    border: 1px solid #568A35;
+	opacity : 0.8;
+	font-weight : 700;
+	color : #fff;
+    transition: .3s;
+}
+
+#w-btn:hover{
+	background: transparent;
+	color: #568a35;
+}
+
+.swiper {
+	width: auto;
+	height: 665px;
+	overflow: hidden;
+    margin-top: 100px;
+}
+
+.swiper-wrapper {
+	height: auto !important;
+	margin : 0 !important;
+	padding: 0 !important;
+}
+
+.swiper-slide {
+	font-size: 1.5rem;
+	background: #fff;
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	margin : 0 !important;
+	padding: 0 !important;
+	width: auto !important;
+	height : 665px !important;
+    position: relative;
+    flex-direction: row;
+}
+
+.l-box {
+	position : relative;
+	border : 1px solid rgba(86, 138, 53, 0.2);
+	border-radius : 20px;
+	width: 412px;
+	height: 665px;
+	margin : 0 !important;
+	padding: 0 !important;
+}
+
+.l-box.ac{
+	border-radius: 20px 0 0 20px;
+}
+
+.gram-content {
+	position : relative;
+	margin : 0 auto;
+	width : 100%;
+    height: 100%;
+}
+
+.gram-nickname {
+	padding : 1rem 0;
+    font-size: 1.5rem;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding-left: 5%;
+}
+
+.d-btn{
+	position: absolute;
+	right: 30px; top: 1.2%;
+	font-size : 0;
+	width : 3rem;
+	height : 3rem;
+	border : 1px solid #999;
+	border-radius : 50%;
+	cursor: pointer;
+    transition: .3s;
+}
+
+.d-btn span{
+	display: block;
+	text-align : center;
+	font-size : 2rem;
+	color : #999;
+    transition: .3s;
+}
+
+.d-btn:hover{
+	background-color: #999;
+}
+
+.d-btn:hover span{
+	color: #fff;
+}
+
+.swiper-slide img {
+	display: block;
+	width: 100%;
+	height: 45vh;	
+	object-fit: cover;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+
+.gram-comment {
+    padding : 0 5%;
+	font-size : 1.5rem;
+	display:-webkit-box;
+	-webkit-box-orient:vertical;
+	-webkit-line-clamp:2;
+	overflow:hidden !important;
+}
+
+.l-btn-box { 
+    position: absolute;
+    right: 65px; bottom: 2%;
+}
+
+.l-btn-box p{
+	font-size: 1rem;
+	text-align: center;
+	margin-top: 2px;
+}
+
+.l-btn {
+	font-size : 0;
+	width : 3rem;
+	height : 3rem;
+	border : 1px solid #FF70A0;
+	border-radius : 50%;
+	cursor: pointer;
+    transition: .3s;
+}
+
+.l-btn span {
+	display: block;
+	text-align : center;
+	font-size : 2rem;
+	color : #FF70A0;
+    transition: .3s;
+}
+
+.l-btn:hover{
+	background-color: #FF70A0;
+}
+
+.l-btn:hover span{
+	color: #fff;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 700,
+  'GRAD' 200,
+  'opsz' 48
+}
+
+#r-btn {
+	font-size : 0;
+	width : 3rem;
+	height : 3rem;
+	border : 1px solid rgba(86, 138, 53, 0.8);
+	border-radius : 50%;
+	cursor: pointer;
+    transition: .3s;
+}
+
+#r-btn span {
+	display: block;
+	text-align : center;
+	font-size : 2rem;
+	color : rgba(86, 138, 53, 0.8);
+    transition: .3s;
+}
+
+#r-btn:hover{
+	background-color: rgba(86, 138, 53, 1);
+}
+
+#r-btn:hover span{
+	color: #fff;
+}
+
+.r-btn{ 
+    position: absolute;
+    right: 15px;
+    bottom: 2%;
+}
+
+.r-btn p{
+	font-size: 1rem;
+	text-align: center;
+	margin-top: 2px;
+}
+
+.r-box {
+	width: 250px;
+    border: 1px solid rgba(86, 138, 53, 0.2);
+    border-radius: 0 20px 20px 0;
+    height: 665px;
+    display: none;
+    margin : 0 !important;
+	padding: 0 !important;
+}
+
+.r-box.ac{
+	display: block;
+}
+
+#gram-reply {
+	display : inline-block;
+	margin : 0;
+	padding : 1.5rem 0 1.5rem 1.5rem;
+	font-size : 1.5rem;
+	font-weight : 700;
+}
+
+#gram-reply-count {
+	display : inline-block;
+	margin : 0;
+	padding-left : 0.3rem;
+	font-size : 1.3rem;
+	font-weight : 400;
+}
+
+
+.gram-reply .reply-nickname {
+	display : block;
+	margin : 0;
+	padding : 0 1rem;
+	font-size : 1rem;
+	font-weight : 700;
+}
+
+.gram-reply .reply-content {
+	display : block;
+	margin : 0;
+	padding : 0 1rem;
+	font-size : 1.3rem;
+}
+
+#reply-box {
+	position: absolute;
+	right : 70px;
+	bottom : 2%;
+}
+
+.reply-btn {
+	position: absolute;
+	right: 22px;
+	bottom: 5.5%;
+	font-size : 0;
+	width : 3rem;
+	height : 3rem;
+	border : 1px solid #568A35;
+	border-radius : 50%;
+	cursor: pointer;
+    transition: .3s;
+}
+
+.reply-btn span {
+	display: block;
+	text-align : center;
+	font-size : 2rem;
+	color : #568A35;
+    transition: .3s;
+}
+
+.reply-btn:hover {
+	background-color: rgba(86, 138, 53, 1);
+}
+
+.reply-btn:hover span {
+	color : #fff;
+}
+
+hr {
+	margin : 0 !important;
+	padding : 0.5rem 0 !important;
+	color : rgba(86, 138, 53, 0.5) !important;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+function mc() {
+	let it = document.getElementsByClassName("it");
+	let a = $(".it").eq(0).val();
+	let b = $(".it").eq(1).val();
+	let aa = parseInt(a);
+	let bb = parseInt(b);
+	
+	let mul = aa * bb;
+	$(".it").eq(2).val(mul);
+	
+};
+
+$(document).ready(function(){
+	$("btn").bind("click", function(){
+		mc();
+	});
+});
+</script>
+<style type="text/css">
+.it{
+	width: 40px;
+}
+</style>
+</head>
+<body>
+JS03<br>
+<input type = "text" class = "it"/>*
+<input type = "text" class = "it"/>
+<input type = "button" value = "=" id = "btn"/>
+<input type = "text" class = "it"/>
+</body>
+</html>

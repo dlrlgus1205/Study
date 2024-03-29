@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+function mc() {
+	let it_first = document.getElementById("it_first");
+	let it_last = document.getElementById("it_last");
+	
+	let first = parseInt(it_first);
+	let last = parseInt(it_last);
+	
+};
+
+$(document).ready(function(){
+	$(".btn").bind("click", function(){
+		
+	});
+});
+</script>
+<style type="text/css">
+table{
+	text-align: center;
+}
+#it_first, #it_last{
+	width: 40px;
+}
+</style>
+</head>
+<body>
+JS07<br>
+<table border = "1">
+	<tr>
+		<td>첫별수</td>
+		<td>
+			<input  type = "text" id = "it_first">
+		</td>
+	</tr>
+	<tr>
+		<td>끝별수</td>
+		<td>
+			<input  type = "text" id = "it_last">
+		</td>
+	</tr>
+	<tr>
+		<td colspan = "2"><input type = "button" value = "별그리기" class = "btn" onclick = "mc()"></td>
+	</tr>
+	<tr>
+		<td colspan = "2"><textarea id = "ta" rows="20" cols="20"></textarea></td>
+	</tr>
+</table>
+</body>
+</html>

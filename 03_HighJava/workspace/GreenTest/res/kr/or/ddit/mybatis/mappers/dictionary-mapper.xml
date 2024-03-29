@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dictionary">
+
+	<!-- 2024.02.07 한요한 업로드 =============================================== -->
+	<!-- 식물도감 검색 리스트 조회 -->
+	<select id="plantSearch" parameterType="String" resultType="DictionaryVO">
+		SELECT *
+          FROM DICTIONARY
+         WHERE SCIENTIFIC_NAME LIKE '%'||#{String}||'%'
+	</select>
+	
+	<!-- 식물도감 상세 페이지 조회 -->
+	<select id="plantDeteil" parameterType="String" resultType="DictionaryVO">
+		SELECT *
+          FROM DICTIONARY
+         WHERE SCIENTIFIC_NAME = #{scientific_name}
+	</select>
+	
+	<!-- 식물도감 추가 -->
+	<insert id="plantInsert" parameterType="DictionaryVO">
+		INSERT INTO LIKES 
+		VALUES(#{scientific_name}, #{plant_name}, #{plant_eng_name},
+		       #{plant_country}, #{plant_content}, #{admin_id})
+	</insert>
+	<!-- ================================================================= -->
+	
+</mapper>
+

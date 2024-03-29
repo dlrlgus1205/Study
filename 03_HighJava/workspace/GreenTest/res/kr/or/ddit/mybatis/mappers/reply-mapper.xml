@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reply">
+	<insert id="insertReply" parameterType="replyVo">
+		<!-- <selectKey keyProperty="reply_no" order="BEFORE" resultType="int">
+			select reply_seq.nextval reply_no from dual
+		</selectKey>  -->
+		insert into reply(reply_no,post_no,reply_content,reply_write_date,reply_update_date,reply_delyn,reportyn,report_count,user_no)
+			values(reply_seq.nextval,#{post_no},#{reply_content},SYSDATE,SYSDATE,'N','N',0,#{user_no})
+		
+	</insert>
+	
+	<select id="listReply" resultType="replyVo" parameterType="int">
+	select * from  reply a,   (  select b.user_no, b.admin_id, c.* from users b, member c
+    where b.mem_id=c.mem_id ) d 
+    where a.user_no = d.user_no
+    and a.post_no = #{post_no}
+    and    a.reply_delyn = 'N'
+    order by reply_no desc
+	
+	</select>
+	
+		<update id="deleteReply" parameterType="int">
+		update reply set
+		reply_delyn = 'Y'
+		where reply_no = #{reply_no}
+		
+		
+		</update>
+		
+		<update id="updateReply" parameterType="replyVo">
+			update reply set
+			reply_content = #{reply_content},
+			reply_update_date = sysdate
+			where reply_no = #{reply_no}
+		
+		</update>
+
+</mapper>
+

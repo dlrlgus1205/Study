@@ -1,0 +1,297 @@
+
+
+$(function(){
+
+
+	selecBox();
+	allSearch();
+	AOS.init();
+	mobileNav();
+	mobileSearch();
+	tabAction('best_word_tab', '');
+	tabAction('thumb_box', '');
+	slideAction();
+
+	var touchDevice = false;
+	if (navigator.userAgent.match(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/)) {
+		  touchDevice = true;
+	}else{
+		 touchDevice =(navigator.maxTouchPoints > 0)
+	}
+
+	
+	 $('.event_slide').bxSlider({
+		auto: true,
+		pager: false,
+		pause: 10000,
+		infiniteLoop:true,
+		touchEnabled : touchDevice
+	 });
+
+	
+
+
+		
+})
+
+
+
+function selecBox(){	
+	var selectTarget = $('.selectbox select');
+		selectTarget.on('blur', function(){
+		$(this).parent().removeClass('focus');
+	});
+
+	selectTarget.change(function(){
+		var select_name = $(this).children('option:selected').text();
+		$(this).siblings('label').text(select_name);
+	});
+
+}
+
+
+function allSearch(){
+	$('.allselect .this').click(function(){
+		$(this).next().slideToggle();
+		$('.allselect ul li a').click(function(){
+			var sch_txt = $(this).text();
+			var group = $(this).attr("data-value")
+			$('.allselect .this .txt').text(sch_txt);
+			$('.allselect ul').slideUp();
+		})
+	})
+}
+
+
+function mobileNav(){
+
+	// mobile
+	$(".btn_menu_open").click(function(){
+		var m_gnbHei = $(window).outerHeight(); 
+		$(".mobile_nav_box").animate({left:'0'}, 400);
+
+		$("body").css({"overflow":"hidden", "position":"fixed"});	
+		$(".mobile .al_box").css({"height":m_gnbHei-50,"overflow-y":'auto'});
+		$("#mobile_header .bg").fadeIn(300);		
+		return false;	
+	});
+
+
+	$("#mobile_header  .bg, .btn_menu_close").click(function(){
+		$(".mob_btn").removeClass("ov");
+		$("body").css({"overflow":"", "position":"static"});
+		$(".mobile_nav_box").animate({left:'-100%',display:'none'}, 400);	
+		$("#mobile_header  .bg").fadeOut(300);
+		return false;	
+	});
+
+	/*
+	$('.al_box > ul > li > a').click(function(){
+		$(this).next().slideToggle();
+		return false;
+	})
+	*/
+}
+
+
+
+function mobileSearch(){
+	$('#mobile_header .mright button').click(function(){
+		if($('#mobile_header .search_bar').css('display') == 'block'){
+			$('#mobile_header .search_bar').slideUp();
+			$('.mright .btn_search').show();
+			$('.mright .btn_close').hide();
+
+		}else{
+			$('#mobile_header .search_bar').slideDown();
+			$('.mright .btn_search').hide();
+			$('.mright .btn_close').show();
+		}
+		
+	
+	})
+	
+}
+
+
+function getThumbnailPrivew(html, target, type) {
+    $target = $('#'+target);
+    if (html.files && html.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $target.css('display', '');
+			if(type=='bg'){
+				$target.css('background-image', 'url(\"' + e.target.result + '\")'); // 배경으로 지정시
+			}else{
+                var html = "";
+				$target.html('<img src="' + e.target.result + '" border="0" alt="" />');
+			}
+        }
+        reader.readAsDataURL(html.files[0]);
+    }
+}
+
+
+
+function tabAction(name, type){
+	 $('#'+name+' .tab_cont').hide();
+	if(type != 'all'){
+		 $('#'+name+' .tab_cont:eq(0)').show();
+		 $('#'+name+' .tab li:first').addClass('active');
+	}
+
+	 $('#'+name+' .tab li a').click(function () {
+		var target = $(this).attr('href');
+		
+		$(this).parent().siblings().removeClass('active');
+		$(this).parent().addClass('active');
+
+		if(target == "#all"){
+			$('#'+name+' .tab_cont').show();
+		}else{
+			$('#'+name+' .tab_cont').hide();
+			$('#'+name+' '+target).show();
+		}
+		return false;
+	})
+}
+
+function addTerms(target){
+	if(target == 'origin_list'){
+		innerText ="<dl class='source_contents_row'>";
+		innerText +="<dt><input type='text' name='source_item[]' class='inp' placeholder='항목 입력' /></dt>";
+		innerText +="<dd><input type='text' name='source_item_contents[]' class='inp' placeholder='URL 입력' /></dd>";
+		innerText +="</dl>";
+	}
+
+	if(target == 'plant_info_list'){
+		innerText ="<dl class='plant_contents_row'>";
+		innerText +="<dt><input type='text' name='plant_item[]' class='inp wid30' placeholder='제목입력' /></dt>";
+		innerText +="<dd><input type='text' name='plant_item_contents[]' class='inp' placeholder='내용입력' /></dd>";
+		innerText +="</dl>";
+	}
+
+	if(target == 'plant_step_list'){
+		var count = $('#plant_step_list dl:last-child .num input').attr('data-num');
+		var num = Number(count)+1;
+
+		innerText ="<dl>";
+		innerText +="<dt><div class='num'>항목순서 : <input type='text' name='cultivate_orders["+num+"]' data-num ='"+num+"' class='inps w70 alc' /></div></dt>";
+		innerText +="<dd>";
+			innerText +="<div class='info'>";
+				innerText +="<div class='file_img_box'>";
+					innerText +="<div class='file_img' id='cultivate_img"+num+"'>";
+						innerText +="<div class='file_up'>";
+							//innerText +="<input title='첨부파일 찾기' class='add_file' name='cultivate_img"+num+"' id='cultivate_img_"+num+"' onchange=\"getThumbnailPrivew(this, 'cultivate_img"+num+"', 'img')\" type='file' accept='image/*' capture='gallery'>";
+							innerText +="<span class='file_add'><span class='hdn'>사진등록</span></span>";
+						innerText +="</div>";
+					innerText +="</div>";
+					innerText +="<div style='display: none'>";
+					   innerText +="  <input title='첨부파일 찾기'  name='cultivate_img"+num+"' id='cultivate_img_"+num+"'onchange=\"getThumbnailPrivew(this, 'cultivate_img"+num+"', 'img')\" type='file' accept='image/*' capture='gallery'> ";
+					innerText +=" </div> ";
+					innerText +=" <a href=\"javascript:void($('#cultivate_img_"+num+"').click()); \" title='이미지를 업로드해주세요.'> ";
+						innerText +=" <button type='button' class='wbtn03'>이미지 업로드</button> ";
+					innerText +="  </a> ";
+				innerText +="</div>";
+
+				innerText +="<div class='cont'>";
+					innerText +="<input type='text' name='cultivate_item["+num+"]' class='inp' placeholder='제목을 입력하세요.' />";
+					innerText +="<div class='inp_area'>";
+						innerText +="<textarea name='cultivate_item_contents["+num+"]'  placeholder='설명을 입력하세요.' ></textarea>";
+					innerText +="</div>";
+				innerText +="</div>";
+			innerText +="</div>";
+		innerText +="</dd>";
+		
+		innerText +="<dd class='btn_bar'>";
+			innerText +="<div class='btn_bar'>";
+				//innerText +="<a href='' class='btn01'>수정</a>";
+				innerText +="<button type='button' onclick=\"inputDel(this);\" class='btn02'>삭제</button>";
+			innerText +="</div>";
+		innerText +="</dd>";
+		innerText +="</dl>";
+	}
+
+	if(target == 'plant_health_list'){
+		innerText ="<dl class='health_contents_row'>";
+			innerText +="<dt><input type='text' name='health_item[]' class='inp' placeholder='제목입력' /></dt>";
+			innerText +="<dd> <div class='inp_area_short'>";
+			innerText +="<textarea name='health_item_contents[]'  placeholder='설명을 입력하세요.' ></textarea>";
+			innerText +="</div></dd>";
+		innerText +="</dl>";
+	}
+
+	if(target == 'plant_expertise_list'){
+		innerText ="<dl>";
+			innerText +="<dt><input type='text' name='' class='inp' placeholder='제목입력' /></dt>";
+			innerText +="<dd>";
+			innerText +="<ul id='' class='inverse  tagit ui-widget ui-widget-content ui-corner-all'></ul>";
+			innerText +="</dd>";
+		innerText +="</dl>";
+	}
+
+
+
+	$('#'+target).append(innerText)
+	
+
+}
+
+function input_remove(target)
+{
+    if(target == 'plant_health_list')
+    {
+        $('.health_contents_row:last').remove();
+    }
+
+    if(target == 'plant_info_list')
+    {
+        $('.plant_contents_row:last').remove();
+    }
+    if(target == 'origin_list')
+    {
+        $('.source_contents_row:last').remove();
+    }
+
+}
+
+
+function inputDel(e){
+	$(e).parents('dl').remove();
+}
+
+var add_file_cnt = 1;
+function imgFileAdd(target, name){
+	//var count = $('#'+target+' li:last-child input.add_file').attr('data-num');
+	//var num = Number(add_file_cnt)+1;
+    add_file_cnt++;
+
+	innerText ="<li>";
+		innerText +="<div class='file_img' id='file"+add_file_cnt+"'>";
+			innerText +="<span class='file_up'>";
+				//innerText +="<input title='첨부파일 찾기' class='add_file' name='"+name+"' data-num='"+num+"' onchange=\"getThumbnailPrivew(this, 'file"+num+"', 'img')\" type='file' accept='image/*' capture='gallery'>";
+				innerText +="<span class='file_add'><span class='hdn'>사진등록</span></span>";
+			innerText +="</span>";
+		innerText +="</div>";
+        innerText +="<div>";
+            innerText +="<div style='display: none'>";
+                innerText +="<input title='첨부파일 찾기' class='add_file' name='cover_upload[]' id='cover_upload_"+add_file_cnt+"' data-num='"+add_file_cnt+"' onchange=\"getThumbnailPrivew(this, 'file"+add_file_cnt+"', 'img')\" type='file' accept='image/*' capture='gallery'>";
+            innerText +="</div>";
+            innerText +=" <a href=\"javascript:void($('#cover_upload_"+add_file_cnt+"').click()); \" title='이미지를 업로드해주세요.'> ";
+                 innerText +=" <button type='button' class='wbtn03'>이미지 업로드</button> ";
+            innerText +="  </a> ";
+        innerText +="</div>";
+	innerText +="</li>";
+
+	$('#'+target).append(innerText)
+
+}
+
+
+function slideAction(){
+
+	 $('.plant_slide').bxSlider({
+		pager: false,
+		infiniteLoop:false
+	  });
+}

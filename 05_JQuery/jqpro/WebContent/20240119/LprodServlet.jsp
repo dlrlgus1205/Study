@@ -1,21 +1,24 @@
-<%@page import="kr.or.ddit.lpord.service.LprodServiceImpl"%>
-<%@page import="kr.or.ddit.lpord.service.ILprodService"%>
-<%@page import="kr.or.ddit.lpord.vo.LprodVo"%>
+<%@page import="kr.or.ddit.lprod.vo.LprodVO"%>
 <%@page import="java.util.List"%>
+<%@page import="kr.or.ddit.lprod.service.LprodServiceImpl"%>
+<%@page import="kr.or.ddit.lprod.service.ILprodService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	// 요청 시 전송 데이터 받기
-	
-	// service 객체 얻기
-	ILprodService service = LprodServiceImpl.getInstance();
+ //요청시 전송데이타 받기 
+ 
+ //service객체  얻기 
+ ILprodService  service = LprodServiceImpl.getService();
 
-	// service 메소드 호출 - 결과값 받기 - List<LprodVo>
-	List<LprodVo> list = service.selectLprod();
-	
-	// 결과값을 requset에 저장
-	request.setAttribute("listval", list);
-	
-	// view페이지로 이동 - forward - LprodView.jsp
-	request.getRequestDispatcher("/20240119/LprodView.jsp").forward(request, response);
+ //service메소드 호출 - 결과값 받기 - List<LprodVO>
+List<LprodVO> list = service.selectLprod();
+ 
+//결과값을 request에 저장 
+//setAttribute("name" , 결과값);
+request.setAttribute("list", list);
+
+//view페이지로 이동 - forward- lprodView.jsp
+request.getRequestDispatcher("/0119/lprodView.jsp")
+              .forward(request, response);
+
 %>

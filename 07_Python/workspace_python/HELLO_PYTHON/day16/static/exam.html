@@ -1,0 +1,288 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+function fn_list(){
+
+	axios.post("/examlist", {
+		method: "post"
+	}).then((res) => {
+		var list = res.data.list;
+	
+		var obj_tbody = document.getElementById("mytbody");
+	
+		var txt = ``;
+	
+		for(var i=0;i<list.length;i++){
+			var e_id = list[i].e_id;
+			var que = list[i].que;
+			var ans = list[i].ans;
+			txt += `
+				<tr>
+					<td><a href="javascript:fn_one('${e_id}')">${e_id}</a></td>
+					<td>${que}</td>
+					<td>${ans}</td>
+				</tr>
+			`;				
+		}
+
+		obj_tbody.innerHTML = txt;	
+		
+	});
+	
+}
+
+function fn_one(e_id){
+	var param = {
+		'e_id':e_id
+	}	
+	axios.post("/examone", {
+		method: "post",
+		data: param,
+	}).then((res) => {
+
+		var obj_e_id = document.getElementById("e_id");
+		var obj_que = document.getElementById("que");
+		var obj_ans1 = document.getElementById("ans1");
+		var obj_ans2 = document.getElementById("ans2");
+		var obj_ans3 = document.getElementById("ans3");
+		var obj_ans4 = document.getElementById("ans4");
+		var obj_ans = document.getElementById("ans");
+	
+		var vo = res.data.vo;
+	
+		obj_e_id.value = vo.e_id;
+		obj_que.value = vo.que;
+		obj_ans1.value = vo.ans1;
+		obj_ans2.value = vo.ans2;
+		obj_ans3.value = vo.ans3;
+		obj_ans4.value = vo.ans4;
+		obj_ans.value = vo.ans;
+		
+		
+	});
+	
+}
+
+function fn_add(){
+	var obj_e_id = document.getElementById("e_id");
+	var obj_que = document.getElementById("que");
+	var obj_ans1 = document.getElementById("ans1");
+	var obj_ans2 = document.getElementById("ans2");
+	var obj_ans3 = document.getElementById("ans3");
+	var obj_ans4 = document.getElementById("ans4");
+	var obj_ans = document.getElementById("ans");
+
+	var param = {
+		'e_id':obj_e_id.value,
+		'que':obj_que.value,
+		'ans1':obj_ans1.value,
+		'ans2':obj_ans2.value,
+		'ans3':obj_ans3.value,
+		'ans4':obj_ans4.value,
+		'ans':obj_ans.value
+
+	}
+	
+	axios.post("/examadd", {
+		method: "post",
+		data: param,
+	}).then((res) => {
+		var cnt = res.data.cnt;
+		if(cnt == 1){
+			alert("정상적으로 추가되었습니다.");
+			fn_list();
+			obj_e_id.value = "";
+			obj_que.value = "";
+			obj_ans1.value = "";
+			obj_ans2.value = "";
+			obj_ans3.value = "";
+			obj_ans4.value = "";
+			obj_ans.value = "";
+		}else{
+			alert("추가도중문제가 생겼습니다.");
+		}
+		
+	});
+	
+
+}
+
+function fn_mod(){
+	var obj_e_id = document.getElementById("e_id");
+	var obj_que = document.getElementById("que");
+	var obj_ans1 = document.getElementById("ans1");
+	var obj_ans2 = document.getElementById("ans2");
+	var obj_ans3 = document.getElementById("ans3");
+	var obj_ans4 = document.getElementById("ans4");
+	var obj_ans = document.getElementById("ans");
+
+	var param = {
+		'e_id':obj_e_id.value,
+		'que':obj_que.value,
+		'ans1':obj_ans1.value,
+		'ans2':obj_ans2.value,
+		'ans3':obj_ans3.value,
+		'ans4':obj_ans4.value,
+		'ans':obj_ans.value
+
+	}
+	
+	axios.post("/exammod", {
+		method: "post",
+		data: param,
+	}).then((res) => {
+		var cnt = res.data.cnt;
+		if(cnt == 1){
+			alert("정상적으로 수정되었습니다.");
+			fn_list();
+			obj_e_id.value = "";
+			obj_que.value = "";
+			obj_ans1.value = "";
+			obj_ans2.value = "";
+			obj_ans3.value = "";
+			obj_ans4.value = "";
+			obj_ans.value = "";
+		}else{
+			alert("수정도중문제가 생겼습니다.");
+		}
+		
+	});	
+}
+
+function fn_del(){
+	var obj_e_id = document.getElementById("e_id");
+	var obj_que = document.getElementById("que");
+	var obj_ans1 = document.getElementById("ans1");
+	var obj_ans2 = document.getElementById("ans2");
+	var obj_ans3 = document.getElementById("ans3");
+	var obj_ans4 = document.getElementById("ans4");
+	var obj_ans = document.getElementById("ans");
+
+	var param = {
+		'e_id':obj_e_id.value
+	}
+	
+	axios.post("/examdel", {
+		method: "post",
+		data: param,
+	}).then((res) => {
+		var cnt = res.data.cnt;
+		if(cnt == 1){
+			alert("정상적으로 삭제되었습니다.");
+			fn_list();
+			obj_e_id.value = "";
+			obj_que.value = "";
+			obj_ans1.value = "";
+			obj_ans2.value = "";
+			obj_ans3.value = "";
+			obj_ans4.value = "";
+			obj_ans.value = "";
+		}else{
+			alert("삭제도중문제가 생겼습니다.");
+		}
+		
+	});	
+
+}
+
+</script>
+</head>
+<body onload="fn_list()">
+EXAM<br>
+<table border="1px">
+	<tr>
+		<td>문제번호</td>
+		<td>문제</td>
+		<td>답</td>
+	</tr>
+	<tbody id="mytbody">
+		<tr>
+			<td colspan="3">
+				검색된 데이터가 없습니다.
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table border="1px">
+	<tr>
+		<td>문제번호</td>
+		<td>
+			<input type="text" id="e_id">
+		</td>
+	</tr>
+	<tr>
+		<td>문제</td>
+		<td>
+			<input type="text" id="que">
+		</td>
+	</tr>
+	<tr>
+		<td>1.</td>
+		<td>
+			<input type="text" id="ans1">
+		</td>
+	</tr>
+	<tr>
+		<td>2.</td>
+		<td>
+			<input type="text" id="ans2">
+		</td>
+	</tr>
+	<tr>
+		<td>3.</td>
+		<td>
+			<input type="text" id="ans3">
+		</td>
+	</tr>
+	<tr>
+		<td>4.</td>
+		<td>
+			<input type="text" id="ans4">
+		</td>
+	</tr>
+	<tr>
+		<td>정답번호</td>
+		<td>
+			<input type="text" id="ans">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="button" value="추가" onclick="fn_add()">
+			<input type="button" value="수정" onclick="fn_mod()">
+			<input type="button" value="삭제" onclick="fn_del()">
+		</td>
+	</tr>
+
+</table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

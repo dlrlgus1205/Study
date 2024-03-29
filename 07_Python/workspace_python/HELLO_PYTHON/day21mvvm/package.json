@@ -1,0 +1,10 @@
+{
+	"scripts": {
+		"start": "node my_exp.js"
+	},
+	"dependencies": {
+		"ejs": "^3.1.9",
+		"express": "^4.18.3",
+		"sync-mysql": "^3.0.1"
+	}
+}

@@ -3,103 +3,93 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel = "stylesheet" href = "../css/public.css">
-<script src = "../js/jquery-3.7.1.min.js"></script>
+<link rel="stylesheet" href="../css/public.css">
+<script src="../js/jquery-3.7.1.min.js"></script>
+
 <script>
-obarrproc = () => {
+obarrproc = () =>{
 	fetch("../20240117/obarr.jsp")
-	
-	.then(resp => resp.json())
-	
+	.then(resp =>  resp.json() )
 	.then(data => {
 		
 	})
 }
-
-objproc = () => {
+objproc = () =>{
 	fetch("../20240117/obj.jsp")
-	
-	.then(resp => {
-		resp.json();
+	.then(resp =>{
+		resp.json();	
 	})
-	
-	.then(data => {
-		// 출력 내용 완성
+	.then(data =>{
+		
+		//출력내용 완성
 		code = "이름 : " + data.name + "<br>";
 		
-		// 출력
+		//출력 
+		
 	})
 }
-
-arrproc = () => {
-	fetch('../20240117/arr.jsp')
+arrproc = () =>{
 	
+	fetch("../20240117/arr.jsp")
 	.then((response) => {
 		response.json();
 	})
+	.then(data =>{
+		 //data : ["홍길동" , "강감찬","이순신", "임꺽정" , "김유신"]
 	
-	.then( data => {
+	
 		data.forEach((vs, index) =>{
-			
 		})
+	    //출력 
+	})
+}
+textproc = () =>{
+	
+	//fetch('http://localhost/jqpro/0117/text.jsp')
+	fetch('http://192.168.142.3/jqpro/0117/text.jsp', {
+		mode  : 'cors'
+	})
+	.then(resp => {
+		console.log("resp" , resp);
+		
+		return resp.text();
+	})
+	.then(data => {
+		//data  : 홍길동/개나리/진달래/무궁화/수선화/라일락
+		
+		str = data.split("/");
+	
+	    //str배열을 이용해서 출력 
+	   /*  str.forEach((vs, index) =>{
+	    }) */
+	    
+	    code = "<ul>"
+	    $.each(str, function(i, val){
+	    	  code += "<li>" + str[i] + "</li>"
+	    })
+	    code += "</ul>";
+	    
+	    $('#result1').html(code);
+	
 	})
 }
 
-textproc = () =>{
-   let promi = fetch('../20240117/text.jsp')
-   
-   .then(resp => {
-      console.log("resp", resp);
-      
-      return resp.text();
-   })
-   
-   .then(data => {
-      // data : 홍길동/개나리/진달래/무궁화/수선화/라일락
-      
-      str = data.split("/");
-   	  
-   	  code = "<ul>"
-   	  // str 배열을 이용해서 출력
-   	  $.each(str, (i, val) => {
-   		  code += "<li>" + str[i] + "</li>";
-   	  })
-   	  code += "</ul>";
-   	  
-   	  $('#result1').html(code);
-   })
-   console.log("promi", promi);
-}
 </script>
-<style>
-#content{
-   display: flex;
-   flex-direction: row;
-   
-}
-
-.box div .res{
-   flex: 25%;
-   border:2px dotted red;
-   box-sizing: border-box;
-}
-</style>
-
 </head>
 <body>
 
-<div class = "box">
-<h4></h4>
-<input type = "button" value = "text" onclick = "textproc()">
-<input type = "button" value = "arr" onclick = "arrproc()">
-<input type = "button" value = "jsonobj" onclick = "objproc()">
-<input type = "button" value = "jsoarr" onclick = "jarrproc()">
+<div class="box">
+<h4>  </h4>
+<input type="button" value="text" onclick="textproc()">
+<input type="button" value="arr" onclick="arrproc()">
+<input type="button" value="jsonobj" onclick="objproc()">
+<input type="button" value="jobarr" onclick="obarrproc()">
 <br><br>
-<div id = "content">
-<div id = "result1" class = "res"></div>
-<div id = "result2" class = "res"></div>
-<div id = "result3" class = "res"></div>
-<div id = "result4" class = "res"></div>
+<div id="content">
+<div id="result1" class="res"></div>
+<div id="result2" class="res"></div>
+<div id="result3" class="res"></div>
+<div id="result4" class="res"></div>
 </div>
 </div>
 </body>
