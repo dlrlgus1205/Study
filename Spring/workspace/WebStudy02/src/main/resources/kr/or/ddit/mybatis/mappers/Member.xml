@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 매핑 타입의 namespace는 DAO의 Qualified Name을 따라가야한다 -->
+<mapper namespace="kr.or.ddit.member.dao.MemberDAO">
+	<select id="selectMemberList" resultType="MemberVO">
+		select
+			mem_id, mem_name, mem_add1, mem_add2, mem_hp, mem_mail, mem_mileage
+		from
+			member
+	</select>
+	<select id="selectMember" resultType="MemberVO" parameterType="string">
+		select
+			mem_id, mem_pass, mem_name, mem_regno1, mem_regno2
+			, to_char(mem_bir, 'YYYY-MM-DD') mem_bir, mem_zip, mem_add1, mem_add2
+			, mem_hometel, mem_comtel, mem_hp, mem_mail, mem_job, mem_like, mem_memorial
+			, to_char(mem_memorialday, 'YYYY-MM-DD') mem_memorialday, mem_mileage, mem_delete
+		from
+			member
+		where
+			mem_id = #{memId}
+	</select>
+</mapper>

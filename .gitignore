@@ -121,3 +121,12 @@
 !/07_Python/workspace_python/HELLO_WEB
 
 /Spring/*
+!/Spring/*
+/Spring/workspace/*
+
+!/Spring/workspace/LanguageLab
+
+
+!/Spring/workspace/WebStudy01
+
+!/Spring/workspace/WebStudy02
