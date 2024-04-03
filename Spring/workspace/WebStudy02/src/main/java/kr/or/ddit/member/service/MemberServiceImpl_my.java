@@ -35,7 +35,15 @@ public class MemberServiceImpl_my implements MemberService {
 
 	@Override
 	public ServiceResult modifyMember(MemberVO member) throws PkNotFoundException {
-		return null;
+		ServiceResult result = null;
+		if(dao.selectMember(member.getMemId()) != null) {
+			int rowcnt = dao.updateMember(member);
+			result = rowcnt > 0 ? ServiceResult.OK : ServiceResult.FAIL;
+		}
+		else {
+			result = ServiceResult.FAIL;
+		}
+		return result;
 	}
 
 	@Override

@@ -11,9 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.service.MemberServiceImpl;
 import kr.or.ddit.vo.MemberVO;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * C : /member/memberInsert.do(GET, POST)
@@ -23,25 +27,28 @@ import kr.or.ddit.vo.MemberVO;
  * U : /member/memberUpdate.do(GET, POST)
  * D : /member/memberDelete.do(POST)
  */
+@Slf4j
 @WebServlet("/member/memberList.do")
 public class MemberListControllerServlet extends HttpServlet{
+//	private static final Logger logger = LoggerFactory.getLogger(MemberListControllerServlet.class);
+//	private static final Logger logger2 = LoggerFactory.getLogger("jdbc.resultsettable");
 	private MemberService service = new MemberServiceImpl();
 	
 	@Override
-		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			List<MemberVO> memberList = service.retrieveMemberList();
-			req.setAttribute("memberList", memberList);
-			
-			String accept = req.getHeader("accept");
-			String path = "";
-			
-			if(accept.contains("json")) {
-				path = "/jsonView.do";
-			}
-			else {
-				path = "/WEB-INF/views/member/memberList.jsp";
-			}
-			
-			req.getRequestDispatcher(path).forward(req, resp);
-		}
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		log.info("컨트롤러 동작");
+		List<MemberVO> memberList = service.retrieveMemberList();
+		
+//		System.out.printf("%s\n", memberList);
+		log.info("조회된 모델 : {}", memberList);
+		// scope
+		req.setAttribute("memberList", memberList);
+		
+		// view
+		String path = "";
+		path = "/WEB-INF/views/member/memberList.jsp";
+		
+		// flow control
+		req.getRequestDispatcher(path).forward(req, resp);
+	}
 }

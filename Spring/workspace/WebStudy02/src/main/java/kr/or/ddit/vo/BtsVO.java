@@ -1,43 +1,34 @@
 package kr.or.ddit.vo;
 
 import java.io.Serializable;
-import java.util.Comparator;
 
 /**
- *	VO(Value Object), DTO(Data Transfer Objcet), Model, Bean
- *	1. 값을 저장할 수 있는 프로퍼티
- *	2. 캡슐화
- *	3. 캡슐화된 프로퍼티에 대한 인터페이스 제공
- *	4. 상태 비교 방법 제공
- *		==, equals(*)
- *	5. 상태 확인 방법 제공
- *	6. 직렬화 가능
+ * VO(Value OBjc DTO(data Transfer object), Model
+ * 1. 값을 저장할 수 없는 프로퍼티
+ * 2. 캡슐화
+ * 3. 캡슐화된 프로퍼티에 대한 인터페이스 제공
+ * 4. 상태 비교 방법 제공
+ * 	==, equals(*)
+ * 5. 상태 확인 방법 제공
+ * 6. 직렬화 가능
  */
-public class BtsVO implements Serializable, Comparable<BtsVO>{
+
+public class BtsVO implements Serializable, Comparable<BtsVO>{ //Serializable : 마커인터페이스
 	public BtsVO() {
 		super();
 	}
-	
-	public BtsVO(String code, String name, String path, int count) {
+
+	public BtsVO(String code, Object name, Object path){
 		super();
 		this.code = code;
-		this.name = name;
-		this.path = path;
-		this.count = count;
+		this.name = (String) name;
+		this.path = (String) path;
 	}
-
+	
 	private String code;
 	private String name;
-	private transient String path;
+	private transient String path; //transient : 투명화
 	private int count;
-	
-	public int getCount() {
-		return count;
-	}
-	
-	public void setCount(int count) {
-		this.count = count;
-	}
 	
 	public String getCode() {
 		return code;
@@ -63,6 +54,14 @@ public class BtsVO implements Serializable, Comparable<BtsVO>{
 		this.path = path;
 	}
 
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -72,7 +71,7 @@ public class BtsVO implements Serializable, Comparable<BtsVO>{
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) { //네번째 규칙
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -89,13 +88,12 @@ public class BtsVO implements Serializable, Comparable<BtsVO>{
 	}
 
 	@Override
-	public String toString() {
-		return "BtsVO [code=" + code + ", name=" + name + ", count=" + count + " ]";
+	public String toString() { //다섯번째 규칙
+		return "BtsVO [code=" + code + ", name=" + name + "]";
 	}
 
 	@Override
 	public int compareTo(BtsVO o) {
-		return o.getCount() - this.getCount();
+		return -(this.count - o.getCount());
 	}
-	
 }

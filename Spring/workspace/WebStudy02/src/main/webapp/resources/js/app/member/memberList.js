@@ -10,35 +10,45 @@ const cPath = document.body.dataset.url;
 
 //간소화 시킨 코드
 $(function() {
-   const $modal = $("#exampleModal").on("show.bs.modal", function(event) {
-      let tr = event.relatedTarget;
-      let memId = $(tr).data("memId")
-      let url = `${cPath}/member/memberDetail.do`;
-      let method = "get";
-
-      $.ajax({
-         url :url ,
-         method :method, 
-         dataType : "json",
-         data: {
-            who : memId
-         },
-         success:function({member}, status, jqXHR) { // 구조 분해 문법
-            console.log(member?.memId);
-            $modal.find("td[id]").each(function(index, td) {
-               let propName = td.id;
-               td.innerHTML = member[propName];
-            })
-         },
-         error:function(jqXHR, status, errorText) {
-            console.log(jqXHR,status, errorText);
-         }
-      });
-	}).on("hidden.bs.modal", function(){
+	const $modal = $("#exampleModal").on("show.bs.modal", function(event) {
+		let tr = event.relatedTarget;
+		let memId = $(tr).data("memId")
+		let url = `${cPath}/member/memberDetail.do`;
+		let method = "get";
+//		$(".btn-primary").on("click", function() {
+//			location.href = `${cPath}/member/memberUpdate.do?who=${memId}`;
+//		})
+		$.ajax({
+			url: url,
+			method: method,
+			dataType: "json",
+			data: {
+				who: memId
+			},
+			success: function({ member }, status, jqXHR) { // 구조 분해 문법
+				console.log(member?.memId);
+				$modal.find("td[id]").each(function(index, td) {
+					let propName = td.id;
+					td.innerHTML = member[propName];
+				})
+				$updateBtn.data("who", member.memId);
+			},
+			error: function(jqXHR, status, errorText) {
+				console.log(jqXHR, status, errorText);
+			}
+		});
+	}).on("hidden.bs.modal", function() {
 		$modal.find("td[id]").html("");
+		$updateBtn.removeData("who");
 	});
 	
 	$("tr[data-mem-id].active").trigger("click");
+	
+	const $updateBtn = $(".btn-primary").on("click", function(){
+		let who = $(this).data("who");
+		location.href = `${cPath}/member/memberUpdate.do?who=${who}`;
+	})
+	
    //디센던트 구조
 //   $(document).on('click', 'tr[data-mem-id]', function () {
       //jQuery객체로 다시 만들기

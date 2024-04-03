@@ -39,7 +39,6 @@ public class MemberInsertControllerServlet_my extends HttpServlet{
 		String memMemorial = (String)req.getParameter("memMemorial");
 		String memMemorialday = (String)req.getParameter("memMemorialday");
 		Long memMileage = Long.valueOf(req.getParameter("memMileage"));
-		String memDelete = (String)req.getParameter("memDelete");
 		
 		if(service.createMember(member) == ServiceResult.PKDUPLICATED) {
 			throw new ResponseStatusException(500, "아이디 중복");
@@ -66,7 +65,6 @@ public class MemberInsertControllerServlet_my extends HttpServlet{
 			member.setMemMemorial(memMemorial);
 			member.setMemMemorialday(memMemorialday);
 			member.setMemMileage(memMileage);
-			member.setMemDelete(memDelete);
 		}
 		
 		String path = "/WEB-INF/views/member/memberForm.jsp";

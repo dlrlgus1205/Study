@@ -2,21 +2,116 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 매핑 타입의 namespace는 DAO의 Qualified Name을 따라가야한다 -->
 <mapper namespace="kr.or.ddit.member.dao.MemberDAO">
+	<resultMap type="MemberVO" id="memberMap" autoMapping="true">
+		<id property="memId" column="MEM_ID" />
+		<collection property="cartList" ofType="CartVO" autoMapping="true">
+			<association property="prod" javaType="ProdVO" autoMapping="true" />
+		</collection>
+	</resultMap>
 	<select id="selectMemberList" resultType="MemberVO">
-		select
-			mem_id, mem_name, mem_add1, mem_add2, mem_hp, mem_mail, mem_mileage
-		from
-			member
+		SELECT
+			MEM_ID, MEM_NAME, MEM_ADD1, MEM_ADD2, MEM_HP, MEM_MAIL, MEM_MILEAGE
+		FROM
+			MEMBER
 	</select>
-	<select id="selectMember" resultType="MemberVO" parameterType="string">
-		select
-			mem_id, mem_pass, mem_name, mem_regno1, mem_regno2
-			, to_char(mem_bir, 'YYYY-MM-DD') mem_bir, mem_zip, mem_add1, mem_add2
-			, mem_hometel, mem_comtel, mem_hp, mem_mail, mem_job, mem_like, mem_memorial
-			, to_char(mem_memorialday, 'YYYY-MM-DD') mem_memorialday, mem_mileage, mem_delete
-		from
-			member
-		where
-			mem_id = #{memId}
+	
+	<select id="selectMember" resultMap="memberMap" parameterType="string">
+		WITH CARTPROD AS (
+			SELECT
+				CART_NO
+				, TO_DATE(SUBSTR(CART_NO, 1, 8), 'YYYYMMDD') CART_DATE
+				, CART_PROD
+				, CART_MEMBER
+				, CART_QTY
+				, PROD.*
+			FROM 
+				CART INNER JOIN PROD ON (CART_PROD = PROD_ID)
+		)
+		SELECT
+			MEM_ID, MEM_PASS, MEM_NAME, MEM_REGNO1, MEM_REGNO2, MEM_BIR, MEM_ZIP
+			, MEM_ADD1, MEM_ADD2, MEM_HOMETEL, MEM_COMTEL, MEM_HP, MEM_MAIL, MEM_JOB
+			, MEM_LIKE, MEM_MEMORIAL, MEM_MEMORIALDAY, MEM_MILEAGE, MEM_DELETE
+			, PROD_NAME
+			, CART_QTY , CART_NO , CART_PROD, CART_DATE
+		FROM
+			MEMBER LEFT OUTER JOIN CARTPROD ON (MEM_ID = CART_MEMBER)
+		WHERE
+			MEM_ID = #{memId}
+	</select>
+	
+	<insert id="insertMember" parameterType="MemberVO">
+		INSERT INTO MEMBER(
+			MEM_ID
+			, MEM_PASS
+			, MEM_NAME
+			, MEM_REGNO1
+			, MEM_REGNO2
+			, MEM_BIR
+			, MEM_ZIP
+			, MEM_ADD1
+			, MEM_ADD2
+			, MEM_HOMETEL
+			, MEM_COMTEL
+			, MEM_HP
+			, MEM_MAIL
+			, MEM_JOB
+			, MEM_LIKE
+			, MEM_MEMORIAL
+			, MEM_MEMORIALDAY
+			, MEM_MILEAGE
+		) VALUES (
+			#{memId, jdbcType=VARCHAR}
+			, #{memPass, jdbcType=VARCHAR}
+			, #{memName, jdbcType=VARCHAR}
+			, #{memRegno1, jdbcType=CHAR}
+			, #{memRegno2, jdbcType=CHAR}
+			, #{memBir, jdbcType=DATE}
+			, #{memZip, jdbcType=CHAR}
+			, #{memAdd1, jdbcType=VARCHAR}
+			, #{memAdd2, jdbcType=VARCHAR}
+			, #{memHometel, jdbcType=VARCHAR}
+			, #{memComtel, jdbcType=VARCHAR}
+			, #{memHp, jdbcType=VARCHAR}
+			, #{memMail, jdbcType=VARCHAR}
+			, #{memJob, jdbcType=VARCHAR}
+			, #{memLike, jdbcType=VARCHAR}
+			, #{memMemorial, jdbcType=VARCHAR}
+			, #{memMemorialday, jdbcType=DATE}
+			, 3000
+		) 
+	</insert>
+	
+	<update id="updateMember" parameterType="MemberVO">
+		UPDATE MEMBER SET
+			 MEM_NAME = #{memName, jdbcType=VARCHAR}
+			, MEM_ZIP = #{memZip, jdbcType=CHAR}
+			, MEM_ADD1 = #{memAdd1, jdbcType=VARCHAR}
+			, MEM_ADD2 = #{memAdd2, jdbcType=VARCHAR}
+			, MEM_HOMETEL = #{memHometel, jdbcType=VARCHAR}
+			, MEM_COMTEL = #{memComtel, jdbcType=VARCHAR}
+			, MEM_HP = #{memHp, jdbcType=VARCHAR}
+			, MEM_MAIL = #{memMail, jdbcType=VARCHAR}
+			, MEM_JOB = #{memJob, jdbcType=VARCHAR}
+			, MEM_LIKE = #{memLike, jdbcType=VARCHAR}
+			, MEM_MEMORIAL = #{memMemorial, jdbcType=VARCHAR}
+			, MEM_MEMORIALDAY = #{memMemorialday, jdbcType=DATE}
+		WHERE
+		    MEM_ID = #{memId}
+	</update>
+	
+	<update id="deleteMember" parameterType="string">
+		UPDATE MEMBER SET
+			MEM_DELETE = 'T'
+		WHERE
+			MEM_ID = #{memId}
+	</update>
+	
+	<select id="selectMemeberForAuth" resultType="MemberVO">
+		SELECT
+			MEM_ID, MEM_PASS, MEM_NAME, MEM_HP, MEM_MAIL, MEM_DELETE
+		FROM
+			MEMBER
+		WHERE
+			MEM_ID = #{memId} AND MEM_DELETE IS NULL
 	</select>
 </mapper>

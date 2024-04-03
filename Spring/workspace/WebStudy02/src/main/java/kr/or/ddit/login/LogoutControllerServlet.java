@@ -23,9 +23,17 @@ public class LogoutControllerServlet extends HttpServlet{
 		
 		session.invalidate();
 		String message = "로그아웃 성공";
+		message = URLEncoder.encode(message, "utf-8");
+		String viewName = "redirect:/?message=" + message;
 //		session.setAttribute("message", message);
 		// 웰컴페이지로 이동
-		message = URLEncoder.encode(message, "utf-8");
-		resp.sendRedirect(req.getContextPath() + "/?message=" + message);
+//		resp.sendRedirect(req.getContextPath() + "/?message=" + message);
+		if(viewName.startsWith("redirect:")) {
+			String location = viewName.replace("redirect:", req.getContextPath());
+			resp.sendRedirect(location);
+		}
+		else {
+			req.getRequestDispatcher(viewName).forward(req, resp);
+		}
 	}
 }

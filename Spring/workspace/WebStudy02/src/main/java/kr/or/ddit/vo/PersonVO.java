@@ -1,12 +1,12 @@
 package kr.or.ddit.vo;
 
 /**
- * Domain Layer : raw data 구조를 반영하여 모델링함
+ * Domain Layer : raw data 구조를 반영하여 모델링함.
  * MemberData.properties 파일의 저장된 사용자의 정보 로딩에 필요한 객체
  * model : id, name, gender, age, address
- *
  */
 public class PersonVO {
+	
 	public PersonVO() {
 		super();
 	}
@@ -56,7 +56,6 @@ public class PersonVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
 	@Override
 	public String toString() {
 		return "PersonVO [id=" + id + ", name=" + name + ", gender=" + gender + ", age=" + age + ", address=" + address
@@ -69,7 +68,6 @@ public class PersonVO {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

@@ -1,13 +1,9 @@
 package kr.or.ddit.member.controller;
 
-import java.beans.IntrospectionException;
-import java.beans.PropertyDescriptor;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,10 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 
 import kr.or.ddit.enumpkg.ServiceResult;
-import kr.or.ddit.exception.ResponseStatusException;
 import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.service.MemberServiceImpl;
 import kr.or.ddit.vo.MemberVO;
@@ -47,7 +41,7 @@ public class MemberInsertControllerServlet extends HttpServlet{
 //		1. 요청 접수, 분석
 		req.setCharacterEncoding("utf-8");
 		MemberVO member = new MemberVO(); // command Object
-		req.setAttribute("member", member);
+		req.setAttribute("mem", member);
 		Map<String, String[]> parameterMap = req.getParameterMap();
 		
 		try {
@@ -76,8 +70,7 @@ public class MemberInsertControllerServlet extends HttpServlet{
 				viewName = "/WEB-INF/views/member/memberForm.jsp";
 				break;
 			default:
-				req.getSession().setAttribute("lastCreated", member);
-				viewName = "redirect:/member/memberList.do";
+				viewName = "redirect:/";
 				break;
 			}
 //		4. scope 를 이용해 model 공유
