@@ -16,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import kr.or.ddit.exception.PkNotFoundException;
 import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.service.MemberServiceImpl;
+import kr.or.ddit.mvc.ViewResolverComposite;
 import kr.or.ddit.vo.MemberVO;
 
 /**
@@ -43,16 +44,8 @@ public class MemberDetailControllerServlet extends HttpServlet{
 			
 			
 			String accept = req.getHeader("accept");
-			String path = "";
+			String viewName = "member/memberList";
 			
-			if(accept.contains("json")) {
-				path = "/jsonView.do";
-			}
-			else {
-				path = "/WEB-INF/views/member/memberList.jsp";
-			}
-			
-			req.setAttribute("member", member);
-			req.getRequestDispatcher(path).forward(req, resp);
+			new ViewResolverComposite().resolveView(viewName, req, resp);
 		}
 }

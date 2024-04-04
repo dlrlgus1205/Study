@@ -87,6 +87,8 @@
 			, MEM_ZIP = #{memZip, jdbcType=CHAR}
 			, MEM_ADD1 = #{memAdd1, jdbcType=VARCHAR}
 			, MEM_ADD2 = #{memAdd2, jdbcType=VARCHAR}
+			, MEM_REGNO1 = #{memRegno1, jdbcType=CHAR}
+			, MEM_REGNO2 = #{memRegno2, jdbcType=CHAR}
 			, MEM_HOMETEL = #{memHometel, jdbcType=VARCHAR}
 			, MEM_COMTEL = #{memComtel, jdbcType=VARCHAR}
 			, MEM_HP = #{memHp, jdbcType=VARCHAR}

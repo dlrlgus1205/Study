@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.service.MemberServiceImpl;
+import kr.or.ddit.mvc.ViewResolverComposite;
 import kr.or.ddit.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,10 +46,9 @@ public class MemberListControllerServlet extends HttpServlet{
 		req.setAttribute("memberList", memberList);
 		
 		// view
-		String path = "";
-		path = "/WEB-INF/views/member/memberList.jsp";
+		String viewName = "member/memberList";
 		
 		// flow control
-		req.getRequestDispatcher(path).forward(req, resp);
+		new ViewResolverComposite().resolveView(viewName, req, resp);
 	}
 }

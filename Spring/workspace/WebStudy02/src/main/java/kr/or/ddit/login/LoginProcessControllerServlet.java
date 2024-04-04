@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import kr.or.ddit.exception.ResponseStatusException;
 import kr.or.ddit.login.service.AuthenticateService;
 import kr.or.ddit.login.service.AuthenticateServiceImpl;
+import kr.or.ddit.mvc.ViewResolverComposite;
 import kr.or.ddit.vo.MemberVO;
 
 @WebServlet("/login/loginProcess.do")
@@ -58,13 +59,7 @@ public class LoginProcessControllerServlet extends HttpServlet {
 //				resp.sendRedirect(req.getContextPath() + "/login/loginForm.jsp");
 				viewName = "redirect:/login/loginForm.jsp";
 			}
-			if(viewName.startsWith("redirect:")) {
-				String location = viewName.replace("redirect:", req.getContextPath());
-				resp.sendRedirect(location);
-			}
-			else {
-				req.getRequestDispatcher(viewName).forward(req, resp);
-			}
+			new ViewResolverComposite().resolveView(viewName, req, resp);
 		}catch(ResponseStatusException e) {
 //			- 불통과 : 상태 코드 400 전송
 			resp.sendError(e.getStatus(), e.getMessage());

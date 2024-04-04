@@ -18,7 +18,7 @@
 <body>
 	<c:set var="member" value="${mem}" />
 	<h4>${member.memName}님의마이페이지</h4>
-	<table class="table table-bordered">
+	<table class="table table-bordered table-striped">
 		<tr>
 			<th>회원번호</th>
 			<td>${member.memId}</td>

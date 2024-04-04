@@ -11,7 +11,7 @@ public class CartVO {
 	private String cartMember;
 	private String cartNo;
 	private String cartProd;
-	private long cartQty;
+	private Long cartQty;
 	private LocalDate cartDate;
 	
 	private MemberVO member; //Has A

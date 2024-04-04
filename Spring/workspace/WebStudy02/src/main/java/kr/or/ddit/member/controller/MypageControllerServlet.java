@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.service.MemberServiceImpl;
+import kr.or.ddit.mvc.ViewResolverComposite;
 import kr.or.ddit.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,15 +39,8 @@ public class MypageControllerServlet extends HttpServlet{
 			
 			req.setAttribute("mem", mem);
 			
-			viewName = "/WEB-INF/views/member/mypage.jsp";
+			viewName = "member/mypage";
 		}
-		
-		if(viewName.startsWith("redirect:")) {
-			String location = viewName.replace("redirect:", req.getContextPath());
-			resp.sendRedirect(location);
-		}
-		else {
-			req.getRequestDispatcher(viewName).forward(req, resp);
-		}
+		new ViewResolverComposite().resolveView(viewName, req, resp);
 	}
 }
