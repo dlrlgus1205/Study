@@ -13,6 +13,7 @@ import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.service.MemberServiceImpl;
 import kr.or.ddit.mvc.ViewResolverComposite;
 import kr.or.ddit.vo.MemberVO;
+import kr.or.ddit.vo.MemberVOWrapper;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -21,26 +22,13 @@ public class MypageControllerServlet extends HttpServlet{
 	private MemberService service = new MemberServiceImpl();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
-		
-		if(session.isNew()) {
-			resp.sendError(400, "현재 요청이 최초의 요청일 수 없음");
-			return;
-		}
-		
-		MemberVO member = (MemberVO) session.getAttribute("authMember");
+		MemberVOWrapper principal = (MemberVOWrapper) req.getUserPrincipal();
 		String viewName = null;
 		
-		if(member == null) {
-			viewName = "redirect:/login/loginForm.jsp";
-		}
-		else {
-			MemberVO mem = service.retrieveMember(member.getMemId());
-			
-			req.setAttribute("mem", mem);
-			
-			viewName = "member/mypage";
-		}
+		MemberVO mem = service.retrieveMember(principal.getName());
+		req.setAttribute("mem", mem);
+		
+		viewName = "member/mypage";
 		new ViewResolverComposite().resolveView(viewName, req, resp);
 	}
 }

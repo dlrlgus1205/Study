@@ -1,4 +1,4 @@
-package kr.or.ddit.vo;
+package kr.or.ddit.vo;	
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -6,9 +6,9 @@ import java.util.List;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import kr.or.ddit.validate.groups.InsertGroup;
+import kr.or.ddit.validate.groups.UpdateGroup;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString.Exclude;
@@ -17,7 +17,7 @@ import lombok.ToString.Exclude;
 @EqualsAndHashCode(of = "prodId")
 //@ToString(exclude = "prodDetail")
 public class ProdVO implements Serializable{
-	@NotBlank(groups = InsertGroup.class)
+	@NotBlank(groups = UpdateGroup.class)
 	private String prodId;
 	@NotBlank
 	private String prodName;

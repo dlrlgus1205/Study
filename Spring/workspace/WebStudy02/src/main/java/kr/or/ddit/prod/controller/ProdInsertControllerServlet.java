@@ -1,8 +1,6 @@
 package kr.or.ddit.prod.controller;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,11 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.ConvertUtils;
-import org.apache.commons.beanutils.converters.AbstractConverter;
-import org.apache.commons.lang3.StringUtils;
-
 import kr.or.ddit.enumpkg.ServiceResult;
 import kr.or.ddit.lprod.controller.OthersControllerAdvice;
 import kr.or.ddit.mvc.ViewResolverComposite;
@@ -26,7 +19,6 @@ import kr.or.ddit.prod.service.ProdServiceImpl;
 import kr.or.ddit.utils.PopulateUtils;
 import kr.or.ddit.utils.ValidateUtils;
 import kr.or.ddit.validate.groups.InsertGroup;
-import kr.or.ddit.validate.groups.UpdateGroup;
 import kr.or.ddit.vo.ProdVO;
 
 @WebServlet("/prod/prodInsert.do")

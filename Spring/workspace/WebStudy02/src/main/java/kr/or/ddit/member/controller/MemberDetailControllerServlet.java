@@ -41,10 +41,10 @@ public class MemberDetailControllerServlet extends HttpServlet{
 			}
 			
 			MemberVO member = service.retrieveMember(memId);
-			
+			req.setAttribute("member", member);
 			
 			String accept = req.getHeader("accept");
-			String viewName = "member/memberList";
+			String viewName = "/jsonView.do";
 			
 			new ViewResolverComposite().resolveView(viewName, req, resp);
 		}

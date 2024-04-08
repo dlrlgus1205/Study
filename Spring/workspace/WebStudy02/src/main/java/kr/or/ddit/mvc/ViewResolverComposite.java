@@ -15,12 +15,14 @@ public class ViewResolverComposite implements ViewResolver {
 	private List<ViewResolver> viewResolvers;
 	{
 		ViewResolver CNVR = new ContentNegotiatingViewResolver();
+		ViewResolver TVR = new TilesViewResolver();
 		ViewResolver IRVR = new InternalResourceViewResolver();      
 		IRVR.setPrefix("/WEB-INF/views/");
 		IRVR.setSuffix(".jsp");
 		
 		viewResolvers = new ArrayList<>();
 		viewResolvers.add(CNVR);
+		viewResolvers.add(TVR);
 		// 항상 가장 마지막에 동작해야함
 		viewResolvers.add(IRVR);
 	}

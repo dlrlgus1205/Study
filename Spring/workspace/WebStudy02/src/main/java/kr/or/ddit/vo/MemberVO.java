@@ -70,5 +70,10 @@ public class MemberVO implements Serializable {
 	private boolean memDelete;
 	
 	// 구매기록
-	private Set<CartVO> cartList; //Has Many //set :중복을 허용하지 않겠다!
+	@JsonIgnore 
+	// transient 직렬화에서 제외
+	private transient Set<CartVO> cartList; //Has Many //set :중복을 허용하지 않겠다!
+	
+	// 사용자 역할 정보
+	private String memRole;
 }

@@ -39,32 +39,14 @@ public class MemberUpdateControllerServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
+		String memId = req.getUserPrincipal().getName();
 		
-		if(session.isNew()) {
-			resp.sendError(400, "현재 요청이 최초의 요청일 수 없음");
-			return;
-		}
+		MemberVO mem = service.retrieveMember(memId);
 		
-		MemberVO member = (MemberVO) session.getAttribute("authMember");
-		String viewName = null;
+		req.setAttribute("mem", mem);
 		
-		if(member == null) {
-			viewName = "redirect:/login/loginForm.jsp";
-		}
-		else {
-			MemberVO mem = service.retrieveMember(member.getMemId());
-			
-			req.setAttribute("mem", mem);
-			
-			viewName = "/WEB-INF/views/member/memberForm.jsp";
-		}
-		if(viewName.startsWith("redirect:")) {
-			String location = viewName.replace("redirect:", req.getContextPath());
-			resp.sendRedirect(location);
-		}
-		else {
-			req.getRequestDispatcher(viewName).forward(req, resp);
-		}
+		String viewName = "member/memberForm";
+		new ViewResolverComposite().resolveView(viewName, req, resp);
 	}
 	
 	@Override
