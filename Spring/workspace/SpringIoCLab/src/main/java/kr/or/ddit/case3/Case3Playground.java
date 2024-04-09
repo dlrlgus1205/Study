@@ -1,13 +1,9 @@
 package kr.or.ddit.case3;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import kr.or.ddit.case1.service.SampleService;
-import kr.or.ddit.vo.SampleVO;
 import lombok.extern.slf4j.Slf4j;
 
 /**

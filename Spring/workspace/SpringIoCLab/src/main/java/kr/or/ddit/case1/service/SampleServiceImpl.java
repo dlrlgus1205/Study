@@ -2,11 +2,17 @@ package kr.or.ddit.case1.service;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import kr.or.ddit.case1.dao.SampleDAO;
 import kr.or.ddit.vo.SampleVO;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+@Service
 @Slf4j
 @NoArgsConstructor
 public class SampleServiceImpl implements SampleService {
@@ -20,6 +26,8 @@ public class SampleServiceImpl implements SampleService {
 //	private SampleDAO dao;
 	
 //	4. DI Container 사용 : 의존 객체와 객체들 간의 의존관계 형성을 대신 해주는 대상
+//	@Autowired
+	@Resource(name = "sampleDAOImpl_MariaDB")
 	private SampleDAO dao;
 	
 	public SampleServiceImpl(SampleDAO dao) {

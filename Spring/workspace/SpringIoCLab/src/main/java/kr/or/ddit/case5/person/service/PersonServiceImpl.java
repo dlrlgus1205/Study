@@ -2,14 +2,18 @@ package kr.or.ddit.case5.person.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import kr.or.ddit.case5.person.dao.PersonDAO;
-import kr.or.ddit.case5.person.dao.PersonDAOImple;
 import kr.or.ddit.case5.person.exception.PersonNotFoundException;
 import kr.or.ddit.vo.PersonVO;
+import lombok.RequiredArgsConstructor;
 
+@Service
+@RequiredArgsConstructor
 public class PersonServiceImpl implements PersonService{
-	private PersonDAO dao = new PersonDAOImple();
-	
+	private final PersonDAO dao;
+
 	@Override
 	public List<PersonVO> retrievePersonList() {
 		List<PersonVO> people = dao.selectPersonList();

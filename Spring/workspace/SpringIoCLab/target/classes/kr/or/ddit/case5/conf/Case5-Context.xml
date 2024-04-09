@@ -3,7 +3,22 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
+	default-init-method="init"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+	
+	<util:properties id="props" location="classpath:kr/or/ddit/MemberData.properties" />	
+	
+	<bean class="kr.or.ddit.case5.person.dao.PersonDAOImpl" id="personDAO"
+		c:props-ref="props"
+		p:fsRes="file:D:/00.medias/another_day.txt"
+	/>
+	<bean class="kr.or.ddit.case5.person.service.PersonServiceImpl" id="personService"
+		c:dao-ref="personDAO"
+	/>
+	<bean class="kr.or.ddit.case5.person.controller.PersonController" id="personController"
+		c:service-ref="personService"
+	/>
 
 </beans>

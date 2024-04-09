@@ -3,17 +3,27 @@ package kr.or.ddit.case4.bts.dao;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Repository;
+
 import kr.or.ddit.vo.BtsVO;
+import lombok.Setter;
 
+@Repository
+@Setter
 public class InMemoryBtsDAOImpl implements BtsDAO {
-
-	Map<String, Object[]> btsMap = new LinkedHashMap<>();
-	{
+	@Resource(name = "btsMap")
+	private Map<String, Object[]> btsMap;
+	
+//	Map<String, Object[]> btsMap = new LinkedHashMap<>();
+	@PostConstruct
+	public void init() {
 		btsMap.put("B001", new Object[] {"뷔", "bts/bui", 100});
 		btsMap.put("B002", new Object[] {"제이홉", "bts/jhop", 200});
 		btsMap.put("B003", new Object[] {"지민", "bts/jimin", 300});
