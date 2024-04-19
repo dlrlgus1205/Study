@@ -14,17 +14,42 @@ public class UserPrincipalRequestWrapper extends HttpServletRequestWrapper {
 	public UserPrincipalRequestWrapper(HttpServletRequest request) {
 		super(request);
 	}
-	
+
 	@Override
 	public Principal getUserPrincipal() {
-		HttpSession session = getSession();
-		MemberVO authMember = (MemberVO) session.getAttribute("authMember");
-		if(authMember != null) {
-			return new MemberVOWrapper(authMember);
+		HttpSession session = getSession(false);
+		if(session!=null) {
+			MemberVO authMember = (MemberVO) session.getAttribute("authMember");
+			if(authMember!=null) {
+				return new MemberVOWrapper(authMember);
+			}
 		}
-		else {
-			return super.getUserPrincipal();
-		}
+		return super.getUserPrincipal();
 	}
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

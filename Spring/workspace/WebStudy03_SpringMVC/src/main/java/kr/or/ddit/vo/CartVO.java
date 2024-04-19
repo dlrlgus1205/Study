@@ -7,14 +7,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(of= {"cartNo","cartProd"})
-public class CartVO implements Serializable {
+@EqualsAndHashCode(of = {"cartNo", "cartProd"})
+public class CartVO implements Serializable{
 	private String cartMember;
 	private String cartNo;
 	private String cartProd;
 	private Long cartQty;
 	private LocalDate cartDate;
 	
-	private MemberVO member; //Has A
+	private MemberVO member; // Has A
 	private ProdVO prod; // Has A
 }

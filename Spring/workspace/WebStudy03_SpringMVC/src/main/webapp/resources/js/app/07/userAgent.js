@@ -1,35 +1,65 @@
 /**
  * 
  */
-let aTags = document.querySelectorAll("a");
-console.log(aTags);
-aTags.forEach(v=>{
-	v.addEventListener("click", e=>{
-		e.preventDefault(); // 동기 중단
-		let url = e.target.href;
-		let p5 = v.dataset.p5
-		let options = {
-			method:"post",
-			headers:{
-				"Accept" : "text/html",
-				"Content-type":"application/x-www-form-urlencoded"
-			},
-			body:"p5="+p5
-		};
-		fetch(url, options)
-			.then(resp=>{
-				if(resp.ok){
-					return resp.text();
+window['ua-btn'].addEventListener("click", (e)=>{
+	let agent = window.navigator.userAgent;
+	const BrowserInfo = {
+		 EDG:"엣지",
+	    CHROME:"크롬",
+	    WHALE:"웨일",
+	    OTHERS:"기타",
+		findBrowserName:function(agent){
+			agent = agent.toUpperCase();
+			let browerName = this.OTHERS;
+			for(let prop in this){
+				if(agent.indexOf(prop) >= 0){
+					browerName = this[prop];
+					break;
 				}
-				else{
-					throw new Error(`요청 처리 실패, 상태코드 : ${resp.status}`);
-				}
-			}).then(obj=>{
-				let parser = new DOMParser();
-				let newDoc = parser.parseFromString(obj, 'text/html');
-				let h4Element = newDoc.querySelector("h4");
-				msgArea.append(h4Element);
-			})
-			.catch(err=>console.log(err));
-	});
+			}
+			return browerName;
+		}
+	}
+	BrowserInfo['SAFARI'] = "사파리";
+	
+	let brName = BrowserInfo.findBrowserName(agent);
+	msgArea.innerHTML = brName;
 });
+
+// document.querySelectorAll("a.asyncA")
+document.addEventListener("click", (e)=>{
+	if(! e.target.classList.contains("asyncA")) return false;
+	e.preventDefault();
+	let aTag = e.target;
+	let url = aTag.href;
+	let method = aTag.dataset.method ?? "get";
+	let headers = {
+		"accept" : "text/html" 
+	}
+	let options = {
+		method:method,
+		headers:headers
+	}
+	fetch(url, options)
+		.then(resp=>{
+			if(resp.ok){
+				return resp.text();
+			}else{
+				throw new Error(`처리 실패 상태코드 : ${resp.status}`);
+			}
+		}).then(html=>{
+			msgArea.innerHTML = html;
+		})
+		.catch()
+});
+
+
+
+
+
+
+
+
+
+
+

@@ -13,9 +13,10 @@ import kr.or.ddit.exception.PkNotFoundException;
 import kr.or.ddit.vo.MemberVO;
 
 class MemberServiceTest extends AbstractRootContextTest{
+	
 	@Autowired
 	MemberService service;
-	
+
 	@Test
 	void testCreateMember() {
 		fail("Not yet implemented");
@@ -23,7 +24,7 @@ class MemberServiceTest extends AbstractRootContextTest{
 
 	@Test
 	void testRetrieveMemberList() {
-		service.retrieveMemberList();
+		service.retrieveMemberList(paging);
 	}
 
 	@Test
@@ -34,7 +35,7 @@ class MemberServiceTest extends AbstractRootContextTest{
 	@Test
 	void testModifyMember() {
 		final MemberVO member = new MemberVO();
-		member.setMemId("agbbbkgljg");
+		member.setMemId("asdfasdfasdf");
 		assertThrows(PkNotFoundException.class, ()->service.modifyMember(member));
 		member.setMemId("a001");
 		member.setMemPass("asdfasf");
@@ -46,7 +47,7 @@ class MemberServiceTest extends AbstractRootContextTest{
 	@Test
 	void testRemoveMember() {
 		final MemberVO member = new MemberVO();
-		member.setMemId("cvnbcvnbcn");
+		member.setMemId("asdfasdfasdf");
 		assertThrows(PkNotFoundException.class, ()->service.removeMember(member));
 		member.setMemId("a001");
 		member.setMemPass("asdfasf");
@@ -56,3 +57,22 @@ class MemberServiceTest extends AbstractRootContextTest{
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -6,13 +6,13 @@ let aTags = document.querySelectorAll("a");
 console.log(aTags);
 aTags.forEach(v=>{
 	v.addEventListener("click", e=>{
-		e.preventDefault(); // 동기 중단
+		e.preventDefault();
 		let url = e.target.href;
-		let p5 = v.dataset.p5
+		let p5 = v.dataset.p5;
 		let options = {
 			method:"post",
 			headers:{
-				"Accept" : "application/json",
+				"Accept":"application/json",
 				"Content-type":"application/x-www-form-urlencoded"
 			},
 			body:"p5="+p5
@@ -21,19 +21,18 @@ aTags.forEach(v=>{
 			.then(resp=>{
 				if(resp.ok){
 					return resp.json();
-				}
-				else{
+				}else{
 					throw new Error(`요청 처리 실패, 상태코드 : ${resp.status}`);
 				}
 			}).then(obj=>console.log(obj))
 			.catch(err=>console.log(err));
 	});
-});
+})
 
 // case2 : form 의 전송을 비동기로
 let forms = document.forms;
 forms[0].addEventListener("submit", e=>{
-	e.preventDefault(); // 동기를 중단시키는 함수
+	e.preventDefault();
 	let form = e.target;
 	
 	// request line
@@ -44,31 +43,30 @@ forms[0].addEventListener("submit", e=>{
 	let headers = {
 		"content-type" : form.enctype,
 		"accept" : "text/html"
-	}
+	};
 	
 	// request body
 	let formData = new FormData(form);
 	console.log(new URLSearchParams(formData).toString());
-	let body = new URLSearchParams(formData).toString();
+	let body =  new URLSearchParams(formData).toString();
 	
 	let options = {
-		method : method,
-		headers : headers
+		method:method,
+		headers:headers
 	}
 	
-	if(method =="get"){
-		url  = `${url}?${body}`;
-	}
-	else {
+	if(method=="get"){
+		url = `${url}?${body}`;
+	}else{
 		options.body = body;
 	}
+	
 	fetch(url, options)
 		.then(resp=>{
 			if(resp.ok){
 				return resp.text();
-			}
-			else{
-				throw new Error(`에러 발생, 상태코드 : ${resp.status}`);
+			}else{
+				throw new Error(`에러 발생, 상태코드 : ${resp.status}`);	
 			}
 		}).then(html=>{
 			// document.body.append(html);
@@ -77,3 +75,15 @@ forms[0].addEventListener("submit", e=>{
 		})
 		.catch(err=>console.log(err));
 });
+
+
+
+
+
+
+
+
+
+
+
+

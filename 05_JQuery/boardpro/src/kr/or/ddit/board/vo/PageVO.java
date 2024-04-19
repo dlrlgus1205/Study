@@ -8,8 +8,8 @@ public class PageVO {
 	private int totalPage;
 	
 	private int count;
-	private static int perList = 3;
-	private static int perPage = 2;
+	private static int perList = 3; // screenSize
+	private static int perPage = 2; // blockSize
 	
 	
 	public int getTotalPage() {

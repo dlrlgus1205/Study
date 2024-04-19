@@ -29,8 +29,32 @@ public class BuyerVO implements Serializable{
 	private String buyerCharger;
 	private String buyerTelext;
 	
-	//BUYER(1) : LPROD(1) --> HAS A
+	// BUYER(1) : LPROD(1) --> HAS A
 	private LprodVO lprod;
-	private List<ProdVO> prodList; // Has Many, Buyer(1) : PROD(N) --> BuyerVO has many ProdVO
+	
 	private int prodCount;
+	
+	private List<ProdVO> prodList; // ---> Has Many, BUYER(1) : PROD(N) --> BuyerVO has many ProdVO
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -15,21 +15,18 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthenticateServiceImpl implements AuthenticateService {
 	private final MemberDAO dao;
-	
+
 	@Override
 	public MemberVO authenticate(MemberVO inputData) throws AuthenticateException {
-		MemberVO saved = dao.selectMemeberForAuth(inputData.getMemId());
-		
-		if(saved == null) {
-			throw new UserNotFoundException(String.format("%s 사용자 없음", inputData.getMemId()));
-		}
+		MemberVO saved = dao.selectMemberForAuth(inputData.getMemId());
+		if(saved==null)
+			throw new UserNotFoundException(String.format("%s 사용자 없음.", inputData.getMemId()));
 		if(saved.isMemDelete())
 			throw new AuthenticateException("이미 탈퇴한 회원");
 		String savedPass = saved.getMemPass();
 		String inputPass = inputData.getMemPass();
-		
-		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder(); //passwordencoder : 인코딩, 인크립팅 모두 가능
-		if(encoder.matches(inputPass,savedPass)) {
+		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		if(encoder.matches(inputPass, savedPass)) {
 			return saved;
 		}else {
 			throw new BadCredentialException("비밀번호 오류");

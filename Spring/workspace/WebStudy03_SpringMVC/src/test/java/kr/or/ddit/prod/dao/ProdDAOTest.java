@@ -1,47 +1,58 @@
 package kr.or.ddit.prod.dao;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import kr.or.ddit.AbstractRootContextTest;
+import kr.or.ddit.paging.PaginationInfo;
 import kr.or.ddit.vo.ProdVO;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;;
 
 @Slf4j
-class ProdDAOTest {
-	ProdDAO dao = new ProdDAOImpl();
+class ProdDAOTest extends AbstractRootContextTest{
+
+	@Autowired
+	ProdDAO dao;
 	
 	@Test
 	void testInsertProd() {
-		ProdVO prod = new ProdVO();
-		prod.setProdName("잉");
-		prod.setProdLgu("P101");
-		prod.setProdBuyer("P10101");
-		prod.setProdCost(500L);
-		prod.setProdPrice(5000L);
-		prod.setProdSale(2500L);
-		prod.setProdOutline("잉");
-		prod.setProdImg("잉");
-		prod.setProdTotalstock(0L);
-		prod.setProdProperstock(0L);
+//		PROD_NAME        NOT NULL VARCHAR2(40)  
+//		PROD_LGU         NOT NULL CHAR(4)       
+//		PROD_BUYER       NOT NULL CHAR(6)       
+//		PROD_COST        NOT NULL NUMBER(10)    
+//		PROD_PRICE       NOT NULL NUMBER(10)    
+//		PROD_SALE        NOT NULL NUMBER(10)    
+//		PROD_OUTLINE     NOT NULL VARCHAR2(100) 
+//		PROD_IMG         NOT NULL VARCHAR2(40)  
+//		PROD_TOTALSTOCK  NOT NULL NUMBER(10)    
+//		PROD_PROPERSTOCK NOT NULL NUMBER(10)    
+		ProdVO prod = dao.selectProd("P101000001");
+		prod.setProdId(null);
 		int rowcnt = dao.insertProd(prod);
 		assertEquals(1, rowcnt);
-		log.info("ProdVO : {}", prod);
+		log.info("prodId : {}", prod.getProdId());
 	}
 
 	@Test
 	void testSelectProdList() {
-		List<ProdVO> prodList = dao.selectProdList();
+		PaginationInfo paging = new PaginationInfo();
+		paging.setTotalRecord(dao.selectTotalRecord(paging));
+		log.info("{}", paging);
+		paging.setCurrentPage(4);
+		List<ProdVO> prodList = dao.selectProdList(paging);
 		log.info("list : {}", prodList);
+		log.info("{}", paging);
 	}
 
 	@Test
 	void testSelectProd() {
-		String prodId = "P101000001";
-		ProdVO prod = dao.selectProd(prodId);
-		log.info("ProdVO : {}", prod);
+		ProdVO prod = dao.selectProd("P101000001");
+		log.info("prod : {}", prod);
 	}
 
 	@Test
@@ -50,3 +61,15 @@ class ProdDAOTest {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -18,12 +18,12 @@ import lombok.extern.slf4j.Slf4j;
 public class CookieReceiveController {
 	@RequestMapping("cookie2")
 	public void handler2(@CookieValue String newCookie) {
-		log.info("newCookie : {}", newCookie);
+		log.info("newCookie : {}" , newCookie);
 	}
 	@RequestMapping("cookie1")
 	public void handler1(HttpServletRequest req) throws UnsupportedEncodingException {
 		Cookie[] cookies = req.getCookies();
-		if(cookies != null) {
+		if(cookies!=null) {
 			for(Cookie single : cookies) {
 				String value = URLDecoder.decode(single.getValue(), "UTF-8");
 				log.info("{} : {}", single.getName(), value);

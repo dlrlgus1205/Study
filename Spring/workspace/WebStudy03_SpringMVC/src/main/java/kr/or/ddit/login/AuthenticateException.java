@@ -4,7 +4,7 @@ package kr.or.ddit.login;
  * 사용자 인증 실패를 표현할 예외
  *
  */
-public class AuthenticateException extends RuntimeException{
+public class AuthenticateException extends RuntimeException {
 
 	public AuthenticateException() {
 		super();
@@ -31,5 +31,5 @@ public class AuthenticateException extends RuntimeException{
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
-
+	
 }

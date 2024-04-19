@@ -3,33 +3,37 @@ package kr.or.ddit.vo;
 import java.io.Serializable;
 
 /**
- * VO(Value OBjc DTO(data Transfer object), Model
- * 1. 값을 저장할 수 없는 프로퍼티
+ * VO(Value Object), DTO(Data Transfer Object), Model, Bean
+ * 1. 값을 저장할 수 있는 프로퍼티.
  * 2. 캡슐화
- * 3. 캡슐화된 프로퍼티에 대한 인터페이스 제공
- * 4. 상태 비교 방법 제공
- * 	==, equals(*)
- * 5. 상태 확인 방법 제공
- * 6. 직렬화 가능
+ * 3. 캡슐화된 프로퍼티에 대한 인터페이스 제공.
+ * 4. 상태 비교 방법 제공.
+ * 		==, equals(*)
+ * 5. 상태 확인 방법 제공.
+ * 6. 직렬화 가능.
  */
-
-public class BtsVO implements Serializable, Comparable<BtsVO>{ //Serializable : 마커인터페이스
+public class BtsVO implements Serializable, Comparable<BtsVO>{	
 	public BtsVO() {
 		super();
 	}
-
-	public BtsVO(String code, Object name, Object path){
+	
+	public BtsVO(String code, String name, String path) {
 		super();
 		this.code = code;
-		this.name = (String) name;
-		this.path = (String) path;
+		this.name = name;
+		this.path = path;
 	}
-	
+
 	private String code;
 	private String name;
-	private transient String path; //transient : 투명화
+	private transient String path;
 	private int count;
-	
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public String getCode() {
 		return code;
 	}
@@ -54,14 +58,6 @@ public class BtsVO implements Serializable, Comparable<BtsVO>{ //Serializable : 
 		this.path = path;
 	}
 
-	public int getCount() {
-		return count;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -71,7 +67,7 @@ public class BtsVO implements Serializable, Comparable<BtsVO>{ //Serializable : 
 	}
 
 	@Override
-	public boolean equals(Object obj) { //네번째 규칙
+	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -88,7 +84,7 @@ public class BtsVO implements Serializable, Comparable<BtsVO>{ //Serializable : 
 	}
 
 	@Override
-	public String toString() { //다섯번째 규칙
+	public String toString() {
 		return "BtsVO [code=" + code + ", name=" + name + "]";
 	}
 
@@ -96,4 +92,22 @@ public class BtsVO implements Serializable, Comparable<BtsVO>{ //Serializable : 
 	public int compareTo(BtsVO o) {
 		return -(this.count - o.getCount());
 	}
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

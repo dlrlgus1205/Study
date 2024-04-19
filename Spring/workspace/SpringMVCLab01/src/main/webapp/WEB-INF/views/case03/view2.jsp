@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h4>logical view name : 없었네??!!</h4>
+<h4> logical view name : 없었네??!!</h4>
 </body>
 </html>

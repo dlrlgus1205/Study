@@ -20,27 +20,27 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 class ValidatorTest {
 	static Validator validator;
-
+	
 	@BeforeAll
 	static void setUpBeforeClass() {
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
 	}
-
+	
 	@Test
 	void testMemberVO() {
 		MemberVO target = new MemberVO();
 //		target.setMemId("a001");
-//		target.setMemPass("a001");
+//		target.setMemPass("12");
 //		target.setMemName("이름");
-//		target.setMemZip("1234");
-//		target.setMemAdd1("adsa");
-//		target.setMemAdd2("erfa");
-//		target.setMemMail("s@naver");
-//		target.setMemRegno1("123");
-//		target.setMemRegno2("123");
+//		target.setMemZip("12345");
+//		target.setMemAdd1("주소1");
+//		target.setMemAdd2("주소2");
+//		target.setMemMail("aa@naver.com");
+//		target.setMemRegno1("123456");
+//		target.setMemRegno2("1234567");
 		Set<ConstraintViolation<MemberVO>> violations = validator.validate(target, InsertGroup.class, UpdateGroup.class, DeleteGroup.class);
-		for (ConstraintViolation<MemberVO> single : violations) {
+		for( ConstraintViolation<MemberVO> single : violations) {
 			String propName = single.getPropertyPath().toString();
 			String message = single.getMessage();
 			log.info("{}; {}", propName, message);
@@ -50,3 +50,25 @@ class ValidatorTest {
 		log.info("검증에 통과하지 못한 프로퍼티 개수 : {}", violations.size());
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

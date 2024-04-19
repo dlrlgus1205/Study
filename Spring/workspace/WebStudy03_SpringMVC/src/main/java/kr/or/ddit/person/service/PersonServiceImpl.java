@@ -13,12 +13,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PersonServiceImpl implements PersonService{
 	private final PersonDAO dao;
-	
+
 	@Override
 	public List<PersonVO> retrievePersonList() {
 		List<PersonVO> people = dao.selectPersonList();
-		for (PersonVO once : people) {
-			System.out.printf("%s 조회\n", once.getName());
+		for(PersonVO once : people) {
+			System.out.printf("%s 조회함.\n", once.getName());
 		}
 		return people;
 	}
@@ -26,9 +26,9 @@ public class PersonServiceImpl implements PersonService{
 	@Override
 	public PersonVO retrievePerson(String id) {
 		PersonVO person = dao.selectPerson(id);
-		if(person == null)
-			throw new PersonNotFoundException(id);
+		if(person==null)
+			throw new PersonNotFoundException(id);	
 		return person;
 	}
-	
+
 }

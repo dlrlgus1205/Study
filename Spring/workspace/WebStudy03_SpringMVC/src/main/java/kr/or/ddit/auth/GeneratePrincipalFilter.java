@@ -9,41 +9,64 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import kr.or.ddit.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 
-
 /**
- * session scope 에 "authMember"라는 속성이 존재하면,
- * 현재 request 에 Wrapper 를 만들고,
- * 해당 wraaper 통해 UserPrincipal을 관리하기 위한 필터
- *
+ * session scope 에 "authMember"라는 속성이 존재하면, 
+ * 현재 request 에 Wrapper 를 만들고, 
+ * 해당 wrapper 통해 UserPrincipal 을 관리하기 위한 필터
  */
 @Slf4j
-public class GeneratePrincipalFilter implements Filter {
+public class GeneratePrincipalFilter implements Filter{
+	
+	@Autowired
+	private MemberService service;
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		log.info("{} 초기화됐음", this.getClass().getSimpleName());
+		log.info("{} 초기화되었음.", this.getClass().getSimpleName());
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
-		Object authMember = req.getSession().getAttribute("authMember");
-		if(authMember == null) {
-			chain.doFilter(request, response);
+		HttpSession session = req.getSession(false);
+		if(session!=null) {
+			Object authMember = session.getAttribute("authMember");
+			if(authMember!=null) {
+				UserPrincipalRequestWrapper wrapper = new UserPrincipalRequestWrapper(req);
+				chain.doFilter(wrapper, response);
+				return;
+			}
 		}
-		else {
-			UserPrincipalRequestWrapper wrapper = new UserPrincipalRequestWrapper(req);
-			chain.doFilter(wrapper, response);
-		}
+		chain.doFilter(request, response);
 	}
 
 	@Override
 	public void destroy() {
-		log.info("{} 소멸됐음", this.getClass().getSimpleName());
+		log.info("{} 소멸되었음.", this.getClass().getSimpleName());
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

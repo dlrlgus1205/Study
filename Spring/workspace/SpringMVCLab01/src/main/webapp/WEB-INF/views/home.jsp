@@ -1,8 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" contentType="text/html; charset=UTF-8"%>
+<%@ page session="false" contentType="text/html; charset=UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+<meta charset="UTF-8">
+<title>SpringMVCLab01</title>
 </head>
 <body>
 <h2> ** SpringMVC tutorial ** </h2>
@@ -40,5 +42,6 @@
 	<li>
 		case10 : <a>파일 핸들링(업다운로드)</a>
 	</li>
-</ul></body>
+</ul>
+</body>
 </html>

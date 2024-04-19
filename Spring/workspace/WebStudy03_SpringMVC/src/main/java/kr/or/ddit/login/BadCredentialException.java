@@ -31,5 +31,5 @@ public class BadCredentialException extends AuthenticateException{
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 }

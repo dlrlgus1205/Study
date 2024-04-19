@@ -23,23 +23,22 @@ public class RequestHeaderReceiveController {
 	}
 	
 	@RequestMapping("header5")
-	public void handler5(@RequestHeader(name = "myHeader", required = false, defaultValue = "1000") String myHeader) {
-		log.info("myHeader : {}", myHeader.toString());
+	public void handler5(@RequestHeader(name="myHeader", required = false, defaultValue = "1000") long myHeader ) {
+		log.info("myHeader : {}", myHeader);
 	}
-	
 	@RequestMapping("header4")
-	public void handler4(@RequestHeader(name = "accept", required = true) String accept) {
+	public void handler4(@RequestHeader(name="accept", required = true) String accept ) {
 		log.info("accept : {}", accept);
 	}
 	
 	@RequestMapping("header3")
 	public void handler3(@RequestHeader MultiValueMap<String, String> headers) {
-		headers.forEach((k, v)->log.info("{} : {}", k, v));
+		headers.forEach((k,v)->log.info("{} : {}", k, v));
 	}
 	
 	@RequestMapping("header2")
 	public void handler2(@RequestHeader Map<String, Object> headers) {
-		headers.forEach((k, v)->log.info("{} : {}", k, v));
+		headers.forEach((k,v)->log.info("{} : {}", k, v));
 	}
 	
 	@RequestMapping("header1")

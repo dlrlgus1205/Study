@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%-- 웹에서 기본 컨텐츠 타입으로 사용되는 HTML 컨텐츠를 생성하기 위한 view layer --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,26 +10,27 @@
 </head>
 <body>
 <c:set value="${pageContext.request.contextPath }" var="cPath" scope="application" />
-<form name = "personForm" action="${cPath }/people.do" method="post">
-	<input type = "text" name = "who"/>
-</form>
-	<table>
-		<thead>
+<table>
+	<thead>
+		<tr>
+			<th>아이디</th>
+			<th>이름</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+		<c:forEach items="${people }" var="once">
 			<tr>
-				<th>아이디</th>
-				<th>이름</th>
+				<td>${once.id}</td>
+				<td><a href="<c:url value='/people/${once.id }'/>">
+					${once['name'] }
+				</a></td>
 			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${people }" var="once">
-			<tr>
-				<td>${once['id'] }</td>
-				<td><a href = "javascript:;" onclick = "clickHandler(event)" data-member-id="${once['id'] }">${once['name'] }</a></td>
-			</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-<script type="text/javascript">
+		</c:forEach>
+		
+	</tbody>
+</table>
+<script>
 	function clickHandler(event){
 		event.preventDefault();
 		let aTag = event.target;
@@ -39,3 +41,17 @@
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

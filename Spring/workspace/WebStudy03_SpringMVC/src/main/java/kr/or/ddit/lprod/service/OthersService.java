@@ -7,6 +7,5 @@ import kr.or.ddit.vo.LprodVO;
 
 public interface OthersService {
 	public List<LprodVO> retrieveLprodList();
-	
 	public List<BuyerVO> retrieveBuyerList();
 }
